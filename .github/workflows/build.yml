@@ -9,7 +9,7 @@ on:
     - master
 
 env:
-  PUBLIC_NAME: XIVComboExpandedest
+  PUBLIC_NAME: XIVComboExpandedestF
   SOLUTION_NAME: XIVComboExpanded
   INTERNAL_NAME: XIVComboExpandedest
   RELEASE_DIR: XIVComboExpanded\bin\Release\XIVComboExpandedest

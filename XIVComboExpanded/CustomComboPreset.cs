@@ -806,5 +806,30 @@ namespace XIVComboExpandedestPlugin
 
         #endregion
         // ====================================================================================
+
+        #region BLUE MAGE
+
+        [OrderedEnum]
+        [CustomComboInfo("Song of Torment Combo", "Bristle -> Song of Torment", BLU.JobID, BLU.Bristle)]
+        BluDoT = 201,
+
+        [OrderedEnum]
+        [CustomComboInfo("Final Sting Combo", "Moon Flute -> Whistle -> Final Sting", BLU.JobID, BLU.FinalSting)]
+        BluLimitBreak = 202,
+
+        [OrderedEnum]
+        [CustomComboInfo("Primal Combo", "Moon Flute -> Primals", BLU.JobID, BLU.Nightbloom)]
+        BluBurstCombo = 203,
+
+        [OrderedEnum]
+        [CustomComboInfo("Moon Flute Opener", "Moon Flute Opener", BLU.JobID, BLU.TripleTrident)]
+        BluTridentCombo = 204,
+
+        #endregion
+
+        [OrderedEnum]
+        [CustomComboInfo("Summoner Gemstone in to Ruin", "Change Gemstone in to Ruin when Unaligned", SMN.JobID, SMN.Gemshine, SMN.PreciousBrilliance)]
+        SummonerGemstoneRuin = 5001,
+
     }
 }

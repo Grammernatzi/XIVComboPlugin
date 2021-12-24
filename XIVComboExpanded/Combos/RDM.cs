@@ -78,6 +78,12 @@ namespace XIVComboExpandedestPlugin.Combos
                 if (HasEffect(RDM.Buffs.Swiftcast) || HasEffect(RDM.Buffs.Dualcast) || HasEffect(RDM.Buffs.LostChainspell) || HasEffect(RDM.Buffs.Acceleration) || (OriginalHook(RDM.Impact) != RDM.Impact && OriginalHook(RDM.Impact) != RDM.Scatter))
                     return OriginalHook(RDM.Impact);
 
+                var gauge = GetJobGauge<RDMGauge>();
+                if (actionID == RDM.Veraero2 && gauge.WhiteMana > gauge.BlackMana)
+                {
+                    return OriginalHook(RDM.Verthunder2);
+                }
+
                 return actionID;
             }
 

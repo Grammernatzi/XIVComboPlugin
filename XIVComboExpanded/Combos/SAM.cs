@@ -149,7 +149,7 @@ namespace XIVComboExpandedestPlugin.Combos
             return actionID;
         }
     }
-
+    /*
     internal class SamuraiMangetsuCombo : CustomCombo
     {
         protected override CustomComboPreset Preset => CustomComboPreset.SamuraiMangetsuCombo;
@@ -163,6 +163,57 @@ namespace XIVComboExpandedestPlugin.Combos
 
                 if (comboTime > 0 && (lastComboMove == SAM.Fuga || lastComboMove == SAM.Fuko) && level >= SAM.Levels.Mangetsu)
                     return SAM.Mangetsu;
+
+                return OriginalHook(SAM.Fuga);
+            }
+
+            return actionID;
+        }
+    }
+    */
+
+    internal class SamuraiMangetsuCombo : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.SamuraiMangetsuCombo;
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            if (actionID == SAM.Mangetsu)
+            {
+                var gauge = GetJobGauge<SAMGauge>();
+                if (HasEffect(SAM.Buffs.MeikyoShisui))
+                {
+                    if (gauge.HasGetsu)
+                    {
+                        return SAM.Oka;
+                    }
+                    else
+                    {
+                        return SAM.Mangetsu;
+                    }
+                }
+
+                if (comboTime > 0 && (lastComboMove == SAM.Fuga || lastComboMove == SAM.Fuko))
+                {
+                    if (gauge.HasGetsu && gauge.HasKa)
+                    {
+                        // return OriginalHook(SAM.Iaijutsu);
+                        if (!HasEffect(SAM.Buffs.Jinpu)) { return SAM.Mangetsu; }
+                        else if (!HasEffect(SAM.Buffs.Shifu)) { return SAM.Oka; }
+                        else
+                        {
+                            var Jinpudurat = FindEffectAny(SAM.Buffs.Jinpu);
+                            var Shifudurat = FindEffectAny(SAM.Buffs.Shifu);
+                            if (Shifudurat.RemainingTime >= Jinpudurat.RemainingTime) { return SAM.Mangetsu; }
+                        }
+                    }
+
+                    if (level >= SAM.Levels.Oka && gauge.HasGetsu)
+                        return SAM.Oka;
+
+                    if (level >= SAM.Levels.Mangetsu)
+                        return SAM.Mangetsu;
+                }
 
                 return OriginalHook(SAM.Fuga);
             }
