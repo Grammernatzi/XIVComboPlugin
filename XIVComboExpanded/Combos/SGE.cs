@@ -73,6 +73,9 @@ namespace XIVComboExpandedestPlugin.Combos
 
         protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
         {
+            if (LocalPlayer?.TargetObject is null && IsEnabled(CustomComboPreset.SagePhlegmaBalls))
+                return OriginalHook(SGE.Dyskrasia);
+
             var gauge = GetJobGauge<SGEGauge>();
 
             if (level >= SGE.Levels.Dosis3)
@@ -96,6 +99,9 @@ namespace XIVComboExpandedestPlugin.Combos
 
         protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
         {
+            if (LocalPlayer?.TargetObject is null)
+                return OriginalHook(SGE.Dyskrasia);
+
             if (level >= SGE.Levels.Dosis3)
                 if (GetCooldown(SGE.Phlegmaga).CooldownRemaining > 45)
                     return OriginalHook(SGE.Dyskrasia);

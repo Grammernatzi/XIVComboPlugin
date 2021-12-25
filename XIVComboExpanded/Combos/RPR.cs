@@ -1,4 +1,5 @@
-﻿using Dalamud.Game.ClientState.JobGauge.Enums;
+﻿using Dalamud.Game.ClientState.Conditions;
+using Dalamud.Game.ClientState.JobGauge.Enums;
 using Dalamud.Game.ClientState.JobGauge.Types;
 
 namespace XIVComboExpandedestPlugin.Combos
@@ -28,6 +29,8 @@ namespace XIVComboExpandedestPlugin.Combos
             ArcaneCircle = 24405,
             PlentifulHarvest = 24385,
             // Misc
+            Soulsow = 24387,
+            HarvestMoon = 24388,
             HellsIngress = 24401,
             HellsEgress = 24402,
             Regress = 24403;
@@ -60,6 +63,7 @@ namespace XIVComboExpandedestPlugin.Combos
                 NightmareScythe = 45,
                 Gluttony = 76,
                 Enshroud = 80,
+                Soulsow = 82,
                 PlentifulHarvest = 88,
                 Communio = 90;
         }
@@ -77,6 +81,38 @@ namespace XIVComboExpandedestPlugin.Combos
 
                 if (HasEffect(RPR.Buffs.Enshrouded) && gauge.LemureShroud == 1 && (gauge.VoidShroud == 0 || !IsEnabled(CustomComboPreset.ReaperLemureFeature)) && level >= RPR.Levels.Communio)
                     return RPR.Communio;
+            }
+
+            return actionID;
+        }
+    }
+
+    internal class ReaperSoulsowReminderFeature : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.ReaperSoulsowReminderFeature;
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            if (actionID == RPR.ShadowOfDeath)
+            {
+                if (OriginalHook(RPR.Soulsow) != RPR.HarvestMoon && !HasCondition(ConditionFlag.InCombat) && level >= RPR.Levels.Soulsow)
+                    return RPR.Soulsow;
+            }
+
+            return actionID;
+        }
+    }
+
+    internal class ReaperSoulsowFeature : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.ReaperSoulsowFeature;
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            if (actionID == RPR.ShadowOfDeath)
+            {
+                if (OriginalHook(RPR.Soulsow) != RPR.HarvestMoon && LocalPlayer?.TargetObject is null && level >= RPR.Levels.Soulsow)
+                    return RPR.Soulsow;
             }
 
             return actionID;
@@ -114,6 +150,9 @@ namespace XIVComboExpandedestPlugin.Combos
             if (actionID == (IsEnabled(CustomComboPreset.ReaperInfernalSliceCombo) ? RPR.InfernalSlice : RPR.Slice))
             {
                 var gauge = GetJobGauge<RPRGauge>();
+
+                if (OriginalHook(RPR.Soulsow) != RPR.HarvestMoon && !HasCondition(ConditionFlag.InCombat) && IsEnabled(CustomComboPreset.ReaperSoulsowReminderFeature) && level >= RPR.Levels.Soulsow)
+                    return RPR.Soulsow;
 
                 if (IsEnabled(CustomComboPreset.ReaperLemureFeature))
                 {
@@ -161,6 +200,9 @@ namespace XIVComboExpandedestPlugin.Combos
         {
             if (actionID == (IsEnabled(CustomComboPreset.ReaperNightmareScytheCombo) ? RPR.NightmareScythe : RPR.SpinningScythe))
             {
+                if (OriginalHook(RPR.Soulsow) == RPR.HarvestMoon && IsEnabled(CustomComboPreset.ReaperSoulsowFeature) && LocalPlayer?.TargetObject is not null && level >= RPR.Levels.Soulsow)
+                    return RPR.HarvestMoon;
+
                 var gauge = GetJobGauge<RPRGauge>();
 
                 if (IsEnabled(CustomComboPreset.ReaperLemureFeature))

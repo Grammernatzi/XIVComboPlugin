@@ -75,7 +75,7 @@ namespace XIVComboExpandedestPlugin.Combos
         {
             if (actionID == RDM.Veraero2 || actionID == RDM.Verthunder2)
             {
-                if (HasEffect(RDM.Buffs.Swiftcast) || HasEffect(RDM.Buffs.Dualcast) || HasEffect(RDM.Buffs.LostChainspell) || HasEffect(RDM.Buffs.Acceleration) || (OriginalHook(RDM.Impact) != RDM.Impact && OriginalHook(RDM.Impact) != RDM.Scatter))
+                if ((HasEffect(RDM.Buffs.Swiftcast) || HasEffect(RDM.Buffs.Dualcast) || HasEffect(RDM.Buffs.LostChainspell) || HasEffect(RDM.Buffs.Acceleration) || (OriginalHook(RDM.Impact) != RDM.Impact && OriginalHook(RDM.Impact) != RDM.Scatter)) && OriginalHook(RDM.Verthunder2) != RDM.Verflare)
                     return OriginalHook(RDM.Impact);
 
                 var gauge = GetJobGauge<RDMGauge>();
@@ -105,7 +105,7 @@ namespace XIVComboExpandedestPlugin.Combos
                 {
                     if (OriginalHook(RDM.Verthunder2) == RDM.Verflare)
                     {
-                        if (IsEnabled(CustomComboPreset.RedMageMeleeComboPlusVerholy) && OriginalHook(RDM.Veraero2) == RDM.Verholy)
+                        if (IsEnabled(CustomComboPreset.RedMageMeleeComboPlusVerholy) && level >= RDM.Levels.Verholy)
                             return RDM.Verholy;
                         return RDM.Verflare;
                     }

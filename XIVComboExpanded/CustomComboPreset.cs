@@ -509,6 +509,15 @@ namespace XIVComboExpandedestPlugin
         [CustomComboInfo("Grim Swathe Feature", "When Gluttony is off-cooldown, Grim Swathe will turn into Gluttony.", RPR.JobID, RPR.GrimSwathe)]
         ReaperGrimSwatheFeature = 3914,
 
+        [OrderedEnum]
+        [CustomComboInfo("Soulsow Reminder Feature", "Slice Combo and Shadow of Death become Soulsow out of combat if you don't have it active.", RPR.JobID, RPR.Slice, RPR.InfernalSlice, RPR.ShadowOfDeath)]
+        ReaperSoulsowReminderFeature = 3915,
+
+        [OrderedEnum]
+        [ParentCombo(ReaperScytheCombo)]
+        [CustomComboInfo("Soulsow Feature", "Your AoE combo becomes Harvest Moon when Soulsow is active and you have a target. Shadow of Death becomes Soulsow if you have no target and Soulsow isn't active.", RPR.JobID, RPR.SpinningScythe, RPR.NightmareScythe, RPR.ShadowOfDeath)]
+        ReaperSoulsowFeature = 3916,
+
         #endregion
         // ====================================================================================
         #region RED MAGE
@@ -570,11 +579,11 @@ namespace XIVComboExpandedestPlugin
         SageKardiaFeature = 4001,
 
         [OrderedEnum]
-        [CustomComboInfo("Phlegma into Dyskrasia", "Phlegma turns into Dyskrasia when you are out of charges.", SGE.JobID, SGE.Phlegma, SGE.Phlegmara, SGE.Phlegmaga)]
+        [CustomComboInfo("Phlegma into Dyskrasia", "Phlegma turns into Dyskrasia when you are out of charges or are currently not targeting anything.", SGE.JobID, SGE.Phlegma, SGE.Phlegmara, SGE.Phlegmaga)]
         SagePhlegmaBalls = 4002,
 
         [OrderedEnum]
-        [CustomComboInfo("Phlegma into Toxikon", "Phlegma turns into Toxikon if you are out of charges and have Addersting.\nThis is prioritized over Dyskrasia if the 'Phlegma into Dyskrasia' feature is enabled.", SGE.JobID, SGE.Phlegma, SGE.Phlegmara, SGE.Phlegmaga)]
+        [CustomComboInfo("Phlegma into Toxikon", "Phlegma turns into Toxikon if you are out of charges, have Addersting.\nThis is prioritized over Dyskrasia if the 'Phlegma into Dyskrasia' feature is enabled.", SGE.JobID, SGE.Phlegma, SGE.Phlegmara, SGE.Phlegmaga)]
         SagePhlegmaToxicBalls = 4003,
 
         [OrderedEnum]
