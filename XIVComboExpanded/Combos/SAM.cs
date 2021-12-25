@@ -198,8 +198,14 @@ namespace XIVComboExpandedestPlugin.Combos
                     if (gauge.HasGetsu && gauge.HasKa)
                     {
                         // return OriginalHook(SAM.Iaijutsu);
-                        if (!HasEffect(SAM.Buffs.Jinpu)) { return SAM.Mangetsu; }
-                        else if (!HasEffect(SAM.Buffs.Shifu)) { return SAM.Oka; }
+                        if (!HasEffect(SAM.Buffs.Jinpu))
+                        {
+                            return SAM.Mangetsu;
+                        }
+                        else if (!HasEffect(SAM.Buffs.Shifu))
+                        {
+                            return SAM.Oka;
+                        }
                         else
                         {
                             var Jinpudurat = FindEffectAny(SAM.Buffs.Jinpu);
@@ -405,6 +411,57 @@ namespace XIVComboExpandedestPlugin.Combos
             }
 
             return actionID;
+        }
+    }
+
+    internal class SamuraiAutoFeature : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.SamuraiAutoFeature;
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            if (actionID == SAM.Hakaze)
+            {
+                if (IsEnabled(CustomComboPreset.SamuraiAutoFeature))
+                {
+                    var gauge = GetJobGauge<SAMGauge>();
+                    var meikyo = HasEffect(SAM.Buffs.MeikyoShisui);
+
+                    if (meikyo)
+                    {
+                        if (!gauge.HasKa)
+                            return SAM.Kasha;
+                        if (!gauge.HasGetsu)
+                            return SAM.Gekko;
+                        return SAM.Yukikaze;
+                    }
+
+                    if (!gauge.HasKa)
+                    {
+                        if (lastComboMove == SAM.Hakaze && level >= SAM.Levels.Shifu)
+                            return SAM.Shifu;
+
+                        if (lastComboMove == SAM.Shifu && level >= SAM.Levels.Kasha)
+                            return SAM.Kasha;
+
+                    }
+                    if (!gauge.HasGetsu)
+                    {
+                        if (lastComboMove == SAM.Hakaze)
+                            return SAM.Jinpu;
+
+                        if (lastComboMove == SAM.Jinpu && level >= SAM.Levels.Gekko)
+                            return SAM.Gekko;
+                    }
+                    if (lastComboMove == SAM.Hakaze && level >= SAM.Levels.Yukikaze)
+                        return SAM.Yukikaze;
+
+                    return actionID;
+
+                }
+            }
+            return actionID;
+
         }
     }
 }

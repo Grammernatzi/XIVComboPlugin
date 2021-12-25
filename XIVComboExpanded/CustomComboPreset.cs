@@ -830,6 +830,8 @@ namespace XIVComboExpandedestPlugin
         [OrderedEnum]
         [CustomComboInfo("Summoner Gemstone in to Ruin", "Change Gemstone in to Ruin when Unaligned", SMN.JobID, SMN.Gemshine, SMN.PreciousBrilliance)]
         SummonerGemstoneRuin = 5001,
-
+        [OrderedEnum]
+        [CustomComboInfo("Samuari Auto", "Change Hakaze to the next ideal target", SAM.JobID, SAM.Hakaze)]
+        SamuraiAutoFeature = 5002,
     }
 }

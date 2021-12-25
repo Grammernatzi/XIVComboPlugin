@@ -321,5 +321,4 @@ namespace XIVComboExpandedestPlugin.Combos
             return actionID;
         }
     }
-
 }
