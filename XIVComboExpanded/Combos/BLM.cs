@@ -27,6 +27,7 @@ namespace XIVComboExpandedestPlugin.Combos
             BetweenTheLines = 7419,
             Despair = 16505,
             UmbralSoul = 16506,
+            Manafont = 158,
             Xenoglossy = 16507,
             HighFire2 = 25794,
             HighBlizzard2 = 25795;
@@ -49,6 +50,7 @@ namespace XIVComboExpandedestPlugin.Combos
         public static class Levels
         {
             public const byte
+                Manafont = 30,
                 Fire3 = 35,
                 Freeze = 40,
                 Blizzard3 = 35,
@@ -76,9 +78,16 @@ namespace XIVComboExpandedestPlugin.Combos
 
                 if (IsEnabled(CustomComboPreset.BlackEnochianDespairFeature) && gauge.InAstralFire)
                 {
-                    if (level >= BLM.Levels.Despair && LocalPlayer?.CurrentMp < 2400)
+                    if (level >= BLM.Levels.Despair && LocalPlayer?.CurrentMp < 2400 && LocalPlayer?.CurrentMp >= 800)
                         return BLM.Despair;
+/*                    if (level >= BLM.Levels.Manafont && LocalPlayer?.CurrentMp < 800 && IsActionOffCooldown(BLM.Manafont)) //Maybe replace Despair itself with Manafont instead.
+                        return BLM.Manafont;*/ 
+                    if (level >= BLM.Levels.Blizzard3 && LocalPlayer?.CurrentMp < 800)
+                        return BLM.Blizzard3;
                 }
+
+                if (gauge.InUmbralIce && gauge.UmbralHearts == 3 && LocalPlayer?.CurrentMp >= 9600)
+                    return BLM.Fire3;
 
                 return gauge.InUmbralIce ? BLM.Blizzard4 : BLM.Fire4;
             }
