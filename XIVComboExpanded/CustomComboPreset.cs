@@ -110,12 +110,24 @@ namespace XIVComboExpandedestPlugin
         BardIronJawsFeature = 2303,
 
         [OrderedEnum]
-        [CustomComboInfo("Burst Shot/Quick Nock/Ladonsbite into Apex Arrow", "Replaces Burst Shot and Quick Nock with Apex Arrow when gauge is full.", BRD.JobID, BRD.BurstShot, BRD.QuickNock, BRD.Ladonsbite)]
+        [CustomComboInfo("Quick Nock/Ladonsbite into Apex Arrow", "Replaces Quick Nock/Ladonsbite with Apex Arrow when gauge is 80 or above.", BRD.JobID, BRD.QuickNock, BRD.Ladonsbite)]
         BardApexFeature = 2304,
 
         [OrderedEnum]
         [CustomComboInfo("Quick Nock/Ladonsbite into Shadowbite", "Replaces Quick Nock/Ladonsbite with Shadowbite when it is ready.", BRD.JobID, BRD.QuickNock, BRD.Ladonsbite)]
         BardShadowbiteFeature = 2305,
+
+        [OrderedEnum]
+        [CustomComboInfo("Empyreal Arrow to Sidewinder", "Replaces Empyreal Arrow to Sidewinder if the latter is off-cooldown and the former is on-cooldown.", BRD.JobID, BRD.EmpyrealArrow)]
+        BardSidewinderFeature = 2306,
+
+        [OrderedEnum]
+        [CustomComboInfo("Radiant Feature", "Replaces Radiant Finale with Battle Voice if Battle Voice is off-cooldown.", BRD.JobID, BRD.RadiantFinale)]
+        BardRadiantFeature = 2307,
+
+        [OrderedEnum]
+        [CustomComboInfo("Barrage Feature", "Replaces Barrage with Straight Shot (and its upgrades) if you have Straight Shot Ready.", BRD.JobID, BRD.Barrage)]
+        BardBarrageFeature = 2308,
 
         #endregion
         // ====================================================================================
@@ -182,6 +194,15 @@ namespace XIVComboExpandedestPlugin
         [OrderedEnum]
         [CustomComboInfo("Wheeling Thrust/Fang and Claw Option", "When you have either Enhanced Fang and Claw or Wheeling Thrust,\nChaos Thrust Combo becomes Wheeling Thrust and Full Thrust Combo becomes Fang and Claw.\nRequires Chaos Thrust Combo and Full Thrust Combo.", DRG.JobID, DRG.FullThrust, DRG.ChaosThrust)]
         DragoonFangThrustFeature = 2205,
+
+        [OrderedEnum]
+        [CustomComboInfo("Stardiver to Nastrond", "Stardiver becomes Nastrond when Nastrond is off-cooldown and the GCD has more than 0.5s left, and becomes Geirskogul outside of Life of the Dragon.", DRG.JobID, DRG.Stardiver)]
+        DragoonNastrondFeature = 2206,
+
+        [OrderedEnum]
+        [ParentCombo(DragoonCoerthanTormentCombo)]
+        [CustomComboInfo("AoE to Wyrmwind", "Coerthan Torment combo becomes Wyrmwind Thrust when you have two Firstminds' Focus.", DRG.JobID, DRG.CoerthanTorment)]
+        DragoonWyrmwindFeature = 2207,
 
         #endregion
         // ====================================================================================
@@ -470,6 +491,10 @@ namespace XIVComboExpandedestPlugin
         ReaperEnshroudCommunioFeature = 3903,
 
         [OrderedEnum]
+        [CustomComboInfo("Stalking and Swathing Feature", "While you have Soul Reaver, Blood Stalk becomes whichever spender is enhanced, and Grim Swathe becomes Guillotine.", RPR.JobID, RPR.BloodStalk, RPR.GrimSwathe)]
+        ReaperStalkingSwathingFeature = 3917,
+
+        [OrderedEnum]
         [ParentCombo(ReaperSliceCombo)]
         [CustomComboInfo("Gibbets and Gallows Feature", "Slice and Shadow of Death are replaced with Gibbet and Gallows while Soul Reaver or Shroud is active.", RPR.JobID, RPR.Slice, RPR.ShadowOfDeath)]
         ReaperGibbetGallowsFeature = 3904,
@@ -632,7 +657,7 @@ namespace XIVComboExpandedestPlugin
 
         [OrderedEnum]
         [ConflictingCombos(SamuraiIaijutsuTsubameGaeshiFeature)]
-        [CustomComboInfo("Tsubame-gaeshi to Iaijutsu", "Replace Tsubame-gaeshi with Iaijutsu when Sen is empty.", SAM.JobID, SAM.TsubameGaeshi)]
+        [CustomComboInfo("Tsubame-gaeshi to Iaijutsu", "Replace Tsubame-gaeshi with Iaijutsu when Sen is not empty.", SAM.JobID, SAM.TsubameGaeshi)]
         SamuraiTsubameGaeshiIaijutsuFeature = 3406,
 
         [OrderedEnum]
@@ -642,13 +667,17 @@ namespace XIVComboExpandedestPlugin
 
         [OrderedEnum]
         [ConflictingCombos(SamuraiTsubameGaeshiIaijutsuFeature)]
-        [CustomComboInfo("Iaijutsu to Tsubame-gaeshi", "Replace Iaijutsu with Tsubame-gaeshi when Sen is not empty.", SAM.JobID, SAM.Iaijutsu)]
+        [CustomComboInfo("Iaijutsu to Tsubame-gaeshi", "Replace Iaijutsu with Tsubame-gaeshi when Sen is empty.", SAM.JobID, SAM.Iaijutsu)]
         SamuraiIaijutsuTsubameGaeshiFeature = 3408,
 
         [OrderedEnum]
         [ConflictingCombos(SamuraiTsubameGaeshiShohaFeature)]
         [CustomComboInfo("Iaijutsu to Shoha", "Replace Iaijutsu with Shoha when meditation is 3 and an Iaijutsu wasn't just used.", SAM.JobID, SAM.Iaijutsu)]
         SamuraiIaijutsuShohaFeature = 3409,
+
+        [OrderedEnum]
+        [CustomComboInfo("Iaijutsu to Kaiten", "Replace Iaijutsu with Kaiten if Kaiten is not active, you have the gauge to use it, and an Iaijutsu is ready.", SAM.JobID, SAM.Iaijutsu)]
+        SamuraiKaitenFeature = 3418,
 
         [OrderedEnum]
         [CustomComboInfo("Shinten to Senei", "Replace Hissatsu: Shinten with Senei when its cooldown is up.", SAM.JobID, SAM.Shinten)]

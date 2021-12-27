@@ -26,6 +26,8 @@ namespace XIVComboExpandedestPlugin.Combos
             CoerthanTorment = 16477,
             DraconianFury = 25770,
             // Combined
+            Geirskogul = 3555,
+            Nastrond = 7400,
             // Jumps
             Jump = 92,
             HighJump = 16478,
@@ -93,6 +95,10 @@ namespace XIVComboExpandedestPlugin.Combos
         {
             if (actionID == DRG.CoerthanTorment)
             {
+                var gauge = GetJobGauge<DRGGauge>();
+                if (gauge.FirstmindsFocusCount == 2)
+                    return DRG.WyrmwindThrust;
+
                 if (comboTime > 0)
                 {
                     if ((lastComboMove == DRG.DoomSpike || lastComboMove == DRG.DraconianFury) && level >= DRG.Levels.SonicThrust)
@@ -172,6 +178,17 @@ namespace XIVComboExpandedestPlugin.Combos
             }
 
             return actionID;
+        }
+    }
+
+    internal class DragoonNastrondFeature : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.DragoonNastrondFeature;
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            var gauge = GetJobGauge<DRGGauge>();
+            return ((IsActionOffCooldown(DRG.Nastrond) && GetCooldown(DRG.TrueThrust).CooldownRemaining > 0.5) || !gauge.IsLOTDActive || !IsActionOffCooldown(DRG.Stardiver)) ? OriginalHook(DRG.Geirskogul) : DRG.Stardiver;
         }
     }
 }

@@ -141,6 +141,40 @@ namespace XIVComboExpandedestPlugin.Combos
         }
     }
 
+    internal class ReaperStalkingSwathingFeature : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.ReaperStalkingSwathingFeature;
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            var gauge = GetJobGauge<RPRGauge>();
+
+            if (gauge.VoidShroud >= 2)
+                return OriginalHook(actionID);
+
+            if (gauge.LemureShroud >= 1)
+            {
+                if (IsEnabled(CustomComboPreset.ReaperComboCommunioFeature))
+                {
+                    if (gauge.LemureShroud == 1 && level >= RPR.Levels.Communio)
+                        return RPR.Communio;
+                }
+
+                if (actionID == RPR.GrimSwathe) return OriginalHook(RPR.Guillotine);
+
+                return HasEffect(RPR.Buffs.EnhancedCrossReaping) ? OriginalHook(RPR.Gallows) : OriginalHook(RPR.Gibbet);
+            }
+
+            if (HasEffect(RPR.Buffs.SoulReaver))
+            {
+                if (actionID == RPR.GrimSwathe) return RPR.Guillotine;
+                return HasEffect(RPR.Buffs.EnhancedGallows) ? RPR.Gallows : RPR.Gibbet;
+            }
+
+            return actionID;
+        }
+    }
+
     internal class ReaperSliceCombo : CustomCombo
     {
         protected override CustomComboPreset Preset => CustomComboPreset.ReaperSliceCombo;
