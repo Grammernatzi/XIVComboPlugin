@@ -30,8 +30,7 @@ namespace XIVComboExpandedestPlugin.Combos
             Xenoglossy = 16507,
             HighFire2 = 25794,
             HighBlizzard2 = 25795,
-            Amplifier = 25796,
-            Manafont = 158;
+            Amplifier = 25796;
 
         public static class Buffs
         {
