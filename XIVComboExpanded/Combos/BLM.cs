@@ -22,6 +22,7 @@ namespace XIVComboExpandedestPlugin.Combos
             Flare = 162,
             LeyLines = 3573,
             Enochian = 3575,
+            Manafont = 158,
             Blizzard4 = 3576,
             Fire4 = 3577,
             BetweenTheLines = 7419,
