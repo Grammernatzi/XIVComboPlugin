@@ -27,6 +27,7 @@ namespace XIVComboExpandedestPlugin.Combos
             BetweenTheLines = 7419,
             Despair = 16505,
             UmbralSoul = 16506,
+            Foul = 7422,
             Xenoglossy = 16507,
             HighFire2 = 25794,
             HighBlizzard2 = 25795,
