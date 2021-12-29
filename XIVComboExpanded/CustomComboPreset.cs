@@ -93,6 +93,10 @@ namespace XIVComboExpandedestPlugin
         [CustomComboInfo("Scathe/Xenoglossy Feature", "Scathe becomes Xenoglossy when available.", BLM.JobID, BLM.Scathe)]
         BlackScatheFeature = 2507,
 
+        [OrderedEnum]
+        [CustomComboInfo("Xenoglossy/Foul to Amplifier", "Xenoglossy/Foul become Amplifier when it's available and the GCD has more than 0.5s remaining, or you have no target.", BLM.JobID, BLM.Xenoglossy, BLM.Foul)]
+        BlackXenoAmpFeature = 2512,
+
         #endregion
         // ====================================================================================
         #region BARD
@@ -122,12 +126,20 @@ namespace XIVComboExpandedestPlugin
         BardSidewinderFeature = 2306,
 
         [OrderedEnum]
-        [CustomComboInfo("Radiant Feature", "Replaces Radiant Finale with Battle Voice if Battle Voice is off-cooldown.", BRD.JobID, BRD.RadiantFinale)]
+        [CustomComboInfo("Radiant Voice Feature", "Replaces Radiant Finale with Battle Voice if Battle Voice is off-cooldown.", BRD.JobID, BRD.RadiantFinale)]
         BardRadiantFeature = 2307,
 
         [OrderedEnum]
-        [CustomComboInfo("Barrage Feature", "Replaces Barrage with Straight Shot (and its upgrades) if you have Straight Shot Ready.", BRD.JobID, BRD.Barrage)]
+        [CustomComboInfo("Radiant Strikes Feature", "Replaces Radiant Finale with Raging Strikes if Raging Strikes is off-cooldown.\nThis takes priority over Battle Voice if Radiant Voice is enabled.", BRD.JobID, BRD.RadiantFinale)]
+        BardRadiantStrikesFeature = 2309,
+
+        [OrderedEnum]
+        [CustomComboInfo("Barrage Feature", "Replaces Barrage with Straight Shot (and its upgrades) if you have Straight Shot Ready (unless Shadowbite is ready).", BRD.JobID, BRD.Barrage)]
         BardBarrageFeature = 2308,
+
+        [OrderedEnum]
+        [CustomComboInfo("Bloodletter to Rain of Death", "Replaces Bloodletter with Rain of Death if there are no self-applied DoTs on your target.", BRD.JobID, BRD.Bloodletter)]
+        BardRainFeature = 2310,
 
         #endregion
         // ====================================================================================
@@ -196,7 +208,7 @@ namespace XIVComboExpandedestPlugin
         DragoonFangThrustFeature = 2205,
 
         [OrderedEnum]
-        [CustomComboInfo("Stardiver to Nastrond", "Stardiver becomes Nastrond when Nastrond is off-cooldown and the GCD has more than 0.5s left, and becomes Geirskogul outside of Life of the Dragon.", DRG.JobID, DRG.Stardiver)]
+        [CustomComboInfo("Stardiver to Nastrond", "Stardiver becomes Nastrond when Nastrond is off-cooldown, and becomes Geirskogul outside of Life of the Dragon.", DRG.JobID, DRG.Stardiver)]
         DragoonNastrondFeature = 2206,
 
         [OrderedEnum]
@@ -388,6 +400,10 @@ namespace XIVComboExpandedestPlugin
         [OrderedEnum]
         [CustomComboInfo("Kassatsu to Trick", "Replaces Kassatsu with Trick Attack while Suiton is up and Kassatsu is on cooldown, or Hidden is up.", NIN.JobID, NIN.Kassatsu)]
         NinjaKassatsuTrickFeature = 3004,
+
+        [OrderedEnum]
+        [CustomComboInfo("Kassatsu to Dream Within a Dream", "Replaces Kassatsu with Dream Within a Dream if the former is on cooldown and the latter is not.\nIf you have Kassatsu to Trick on, Trick Attack takes priority over DwaD.", NIN.JobID, NIN.Kassatsu)]
+        NinjaKassatsuDWaDFeature = 3015,
 
         [OrderedEnum]
         [CustomComboInfo("Ten Chi Jin to Meisui", "Replaces Ten Chi Jin (the move) with Meisui while Suiton is up.", NIN.JobID, NIN.TenChiJin)]
@@ -594,6 +610,18 @@ namespace XIVComboExpandedestPlugin
         [ConflictingCombos(RedMageVerprocComboPlus)]
         [CustomComboInfo("Veraero/Verthunder into Scorch", "Replaces Veraero/Verthunder 1/3 with Scorch when it's available.\nThis feature is already in Verproc into Jolt Plus, this is for people who don't want to use that.", RDM.JobID, RDM.Veraero, RDM.Verthunder, RDM.Veraero3, RDM.Verthunder3)]
         RedMageVeraeroVerThunderScorchFeature = 3510,
+
+        [OrderedEnum]
+        [CustomComboInfo("Embolden to Manaification", "Replaces Embolden with Manafication if the former is on cooldown and the latter is not.", RDM.JobID, RDM.Embolden)]
+        RedMageEmboldenFeature = 3511,
+
+        [OrderedEnum]
+        [CustomComboInfo("Acceleration to Swiftcast", "Replaces Acceleration with Swiftcast if the former is on cooldown and the latter is not.", RDM.JobID, RDM.Acceleration)]
+        RedMageAccelerationFeature = 3512,
+
+        [OrderedEnum]
+        [CustomComboInfo("Fleche to Contre-Sixte", "Replaces Fleche with Contre-Sixte if the former is on cooldown and the latter is not.", RDM.JobID, RDM.Fleche)]
+        RedMageContreSixteFeature = 3513,
 
         #endregion
         // ====================================================================================

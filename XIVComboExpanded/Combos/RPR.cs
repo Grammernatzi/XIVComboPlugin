@@ -234,7 +234,7 @@ namespace XIVComboExpandedestPlugin.Combos
         {
             if (actionID == (IsEnabled(CustomComboPreset.ReaperNightmareScytheCombo) ? RPR.NightmareScythe : RPR.SpinningScythe))
             {
-                if (OriginalHook(RPR.Soulsow) == RPR.HarvestMoon && IsEnabled(CustomComboPreset.ReaperSoulsowFeature) && LocalPlayer?.TargetObject is not null && level >= RPR.Levels.Soulsow)
+                if (OriginalHook(RPR.Soulsow) == RPR.HarvestMoon && IsEnabled(CustomComboPreset.ReaperSoulsowFeature) && LocalPlayer?.TargetObject is not null && level >= RPR.Levels.Soulsow && !HasEffect(RPR.Buffs.SoulReaver))
                     return RPR.HarvestMoon;
 
                 var gauge = GetJobGauge<RPRGauge>();

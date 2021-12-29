@@ -30,7 +30,12 @@ namespace XIVComboExpandedestPlugin.Combos
             Verholy = 7526,
             Verflare = 7525,
             Scorch = 16530,
-            Resolution = 25858;
+            Resolution = 25858,
+            Embolden = 7520,
+            Manafication = 7521,
+            Acceleration = 7518,
+            ContreSixte = 7519,
+            Fleche = 7517;
 
         public static class Buffs
         {
@@ -58,6 +63,8 @@ namespace XIVComboExpandedestPlugin.Combos
                 Zwerchhau = 35,
                 Redoublement = 50,
                 Vercure = 54,
+                ContreSixte = 56,
+                Manafication = 60,
                 Jolt2 = 62,
                 Impact = 66,
                 Verflare = 68,
@@ -224,6 +231,36 @@ namespace XIVComboExpandedestPlugin.Combos
                     return RDM.Scorch;
 
                 return actionID;
+            }
+        }
+
+        internal class RedMageEmboldenFeature : CustomCombo
+        {
+            protected override CustomComboPreset Preset => CustomComboPreset.RedMageEmboldenFeature;
+
+            protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+            {
+                return (IsActionOffCooldown(RDM.Manafication) && !IsActionOffCooldown(RDM.Embolden) && level >= RDM.Levels.Manafication) ? RDM.Manafication : RDM.Embolden;
+            }
+        }
+
+        internal class RedMageAccelerationFeature : CustomCombo
+        {
+            protected override CustomComboPreset Preset => CustomComboPreset.RedMageAccelerationFeature;
+
+            protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+            {
+                return ((IsActionOffCooldown(All.Swiftcast) && !IsActionOffCooldown(RDM.Acceleration)) || level < RDM.Levels.Redoublement) ? All.Swiftcast : RDM.Acceleration;
+            }
+        }
+
+        internal class RedMageContreSixteFeature : CustomCombo
+        {
+            protected override CustomComboPreset Preset => CustomComboPreset.RedMageContreSixteFeature;
+
+            protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+            {
+                return (IsActionOffCooldown(RDM.ContreSixte) && !IsActionOffCooldown(RDM.Fleche) && level >= RDM.Levels.ContreSixte) ? RDM.ContreSixte : RDM.Fleche;
             }
         }
     }

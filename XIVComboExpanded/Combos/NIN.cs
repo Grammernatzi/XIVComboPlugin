@@ -58,6 +58,7 @@ namespace XIVComboExpandedestPlugin.Combos
                 GustSlash = 4,
                 AeolianEdge = 26,
                 Assassinate = 40,
+                Kassatsu = 50,
                 HakkeMujinsatsu = 52,
                 ArmorCrush = 54,
                 DreamWithinADream = 56,
@@ -196,11 +197,19 @@ namespace XIVComboExpandedestPlugin.Combos
             {
                 if ((HasEffect(NIN.Buffs.Suiton) && !IsActionOffCooldown(NIN.Kassatsu)) || HasEffect(NIN.Buffs.Hidden))
                     return NIN.TrickAttack;
-
-                return NIN.Kassatsu;
             }
 
             return actionID;
+        }
+    }
+
+    internal class NinjaKassatsuDWaDFeature : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.NinjaKassatsuDWaDFeature;
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            return (!IsActionOffCooldown(NIN.Kassatsu) && IsActionOffCooldown(NIN.DreamWithinADream)) || level < NIN.Levels.Kassatsu ? OriginalHook(NIN.DreamWithinADream) : actionID;
         }
     }
 

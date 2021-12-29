@@ -27,10 +27,11 @@ namespace XIVComboExpandedestPlugin.Combos
             BetweenTheLines = 7419,
             Despair = 16505,
             UmbralSoul = 16506,
-            Manafont = 158,
             Xenoglossy = 16507,
             HighFire2 = 25794,
-            HighBlizzard2 = 25795;
+            HighBlizzard2 = 25795,
+            Amplifier = 25796,
+            Manafont = 158;
 
         public static class Buffs
         {
@@ -62,7 +63,8 @@ namespace XIVComboExpandedestPlugin.Combos
                 BetweenTheLines = 62,
                 Despair = 72,
                 UmbralSoul = 76,
-                Xenoglossy = 80;
+                Xenoglossy = 80,
+                Amplifier = 86;
         }
     }
 
@@ -242,6 +244,16 @@ namespace XIVComboExpandedestPlugin.Combos
         }
     }
 
+    internal class BlackXenoAmpFeature : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.BlackXenoAmpFeature;
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            return ((IsActionOffCooldown(BLM.Amplifier) && GetCooldown(BLM.Fire).CooldownRemaining > 0.5) || LocalPlayer?.TargetObject is null) && level >= BLM.Levels.Amplifier ? BLM.Amplifier : actionID;
+        }
+    }
+
     internal class BlackScatheFeature : CustomCombo
     {
         protected override CustomComboPreset Preset => CustomComboPreset.BlackScatheFeature;
@@ -252,7 +264,7 @@ namespace XIVComboExpandedestPlugin.Combos
             {
                 var gauge = GetJobGauge<BLMGauge>();
                 if (level >= BLM.Levels.Xenoglossy && gauge.PolyglotStacks > 0)
-                    return BLM.Xenoglossy;
+                    return ((IsActionOffCooldown(BLM.Amplifier) && GetCooldown(BLM.Fire).CooldownRemaining > 0.5) || LocalPlayer?.TargetObject is null) && level >= BLM.Levels.Amplifier && IsEnabled(CustomComboPreset.BlackXenoAmpFeature) ? BLM.Amplifier : BLM.Xenoglossy;
             }
 
             return actionID;
