@@ -892,12 +892,14 @@ namespace XIVComboExpandedestPlugin
         BluTridentCombo = 204,
 
         #endregion
-
         [OrderedEnum]
         [CustomComboInfo("Summoner Gemstone in to Ruin", "Change Gemstone in to Ruin when Unaligned", SMN.JobID, SMN.Gemshine, SMN.PreciousBrilliance)]
         SummonerGemstoneRuin = 5001,
         [OrderedEnum]
         [CustomComboInfo("Samuari Auto", "Change Hakaze to the next ideal target", SAM.JobID, SAM.Hakaze)]
         SamuraiAutoFeature = 5002,
+        [OrderedEnum]
+        [CustomComboInfo("Fire 4 Auto Feature", "Fire 4 becomes Fire 1/3 when low on Astral Fire.", BLM.JobID)]
+        BlackFire4Auto = 5003,
     }
 }

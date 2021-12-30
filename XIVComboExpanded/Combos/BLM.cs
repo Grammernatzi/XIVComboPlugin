@@ -79,6 +79,12 @@ namespace XIVComboExpandedestPlugin.Combos
             {
                 var gauge = GetJobGauge<BLMGauge>();
 
+                if (gauge.ElementTimeRemaining < 3050 && HasEffect(BLM.Buffs.Firestarter) && CustomCombo.IsEnabled(CustomComboPreset.BlackFire4Auto))
+                    return BLM.Fire3;
+                if (gauge.ElementTimeRemaining < 4800 && !HasEffect(BLM.Buffs.Firestarter) && CustomCombo.IsEnabled(CustomComboPreset.BlackFire4Auto))
+                    return OriginalHook(BLM.Fire);
+
+
                 if (IsEnabled(CustomComboPreset.BlackEnochianDespairFeature) && gauge.InAstralFire)
                 {
                     if (level >= BLM.Levels.Despair && LocalPlayer?.CurrentMp < 2400 && LocalPlayer?.CurrentMp >= 800)
