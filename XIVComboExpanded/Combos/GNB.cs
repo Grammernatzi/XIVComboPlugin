@@ -74,28 +74,25 @@ namespace XIVComboExpandedestPlugin.Combos
                     var maxAmmo = level >= GNB.Levels.CartridgeCharge2 ? 3 : 2;
 
                     if ((lastComboMove == GNB.SolidBarrel || lastComboMove == GNB.BrutalShell) && level >= 30 && gauge.Ammo == maxAmmo)
-                        return GNB.BurstStrike;
+                      {
+                            if (IsEnabled(CustomComboPreset.GunbreakerBurstStrikeFeature))
+                            {
+                                if (IsEnabled(CustomComboPreset.GunbreakerBurstStrikeCont))
+                                {
+                                    if (level >= GNB.Levels.EnhancedContinuation && HasEffect(GNB.Buffs.ReadyToBlast))
+                                        return GNB.Hypervelocity;
+                                }
+
+                                if (level >= GNB.Levels.BurstStrike && gauge.Ammo == maxAmmo)
+                                    return GNB.BurstStrike;
+                            }
+                        }
 
                     if (lastComboMove == GNB.KeenEdge && level >= GNB.Levels.BrutalShell)
                         return GNB.BrutalShell;
 
                     if (lastComboMove == GNB.BrutalShell && level >= GNB.Levels.SolidBarrel)
                     {
-                        if (IsEnabled(CustomComboPreset.GunbreakerBurstStrikeFeature))
-                        {
-                            var gauge = GetJobGauge<GNBGauge>();
-                            var maxAmmo = level >= GNB.Levels.CartridgeCharge2 ? 3 : 2;
-
-                            if (IsEnabled(CustomComboPreset.GunbreakerBurstStrikeCont))
-                            {
-                                if (level >= GNB.Levels.EnhancedContinuation && HasEffect(GNB.Buffs.ReadyToBlast))
-                                    return GNB.Hypervelocity;
-                            }
-
-                            if (level >= GNB.Levels.BurstStrike && gauge.Ammo == maxAmmo)
-                                return GNB.BurstStrike;
-                        }
-
                         return GNB.SolidBarrel;
                     }
                 }
