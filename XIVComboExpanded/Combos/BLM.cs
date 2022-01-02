@@ -79,24 +79,25 @@ namespace XIVComboExpandedestPlugin.Combos
             {
                 var gauge = GetJobGauge<BLMGauge>();
 
+                if (IsEnabled(CustomComboPreset.BlackEnochianDespairFeature) && gauge.InAstralFire)
+                {
+                    if (level >= BLM.Levels.Despair && LocalPlayer?.CurrentMp < 2400 && LocalPlayer?.CurrentMp >= 800 && gauge.ElementTimeRemaining > 2900)
+                        return BLM.Despair;
+                    /*                    if (level >= BLM.Levels.Manafont && LocalPlayer?.CurrentMp < 800 && IsActionOffCooldown(BLM.Manafont)) //Maybe replace Despair itself with Manafont instead.
+                                            return BLM.Manafont;*/
+                    if (level >= BLM.Levels.Blizzard3 && LocalPlayer?.CurrentMp < 2400)
+                        return BLM.Blizzard3;
+                }
+
                 if (gauge.ElementTimeRemaining < 3050 && HasEffect(BLM.Buffs.Firestarter) && CustomCombo.IsEnabled(CustomComboPreset.BlackFire4Auto))
                     return BLM.Fire3;
                 if (gauge.ElementTimeRemaining < 4800 && !HasEffect(BLM.Buffs.Firestarter) && CustomCombo.IsEnabled(CustomComboPreset.BlackFire4Auto))
                     return OriginalHook(BLM.Fire);
 
-
-                if (IsEnabled(CustomComboPreset.BlackEnochianDespairFeature) && gauge.InAstralFire)
-                {
-                    if (level >= BLM.Levels.Despair && LocalPlayer?.CurrentMp < 2400 && LocalPlayer?.CurrentMp >= 800)
-                        return BLM.Despair;
-/*                    if (level >= BLM.Levels.Manafont && LocalPlayer?.CurrentMp < 800 && IsActionOffCooldown(BLM.Manafont)) //Maybe replace Despair itself with Manafont instead.
-                        return BLM.Manafont;*/ 
-                    if (level >= BLM.Levels.Blizzard3 && LocalPlayer?.CurrentMp < 800)
-                        return BLM.Blizzard3;
-                }
-
                 if (gauge.InUmbralIce && gauge.UmbralHearts == 3 && LocalPlayer?.CurrentMp >= 9600)
+                {
                     return BLM.Fire3;
+                }
 
                 return gauge.InUmbralIce ? BLM.Blizzard4 : BLM.Fire4;
             }

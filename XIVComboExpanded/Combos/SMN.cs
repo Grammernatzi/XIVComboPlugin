@@ -184,12 +184,15 @@ namespace XIVComboExpandedestPlugin.Combos
             {
                 var gauge = GetJobGauge<SMNGauge>();
                 if (!gauge.HasAetherflowStacks)
-                    return SMN.EnergySyphon;
+                    if (level >= SMN.Levels.EnergySyphon)
+                        return SMN.EnergySyphon;
+                    else
+                        return SMN.EnergyDrain;
 
                 if (level >= SMN.Levels.Painflare)
                     return SMN.Painflare;
 
-                return SMN.EnergySyphon;
+                return SMN.Fester;
             }
 
             return actionID;

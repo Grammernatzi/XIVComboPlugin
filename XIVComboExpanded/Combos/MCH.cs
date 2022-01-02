@@ -76,7 +76,6 @@ namespace XIVComboExpandedestPlugin.Combos
         {
             if (actionID == MCH.CleanShot || actionID == MCH.HeatedCleanShot)
             {
-
                 var gauge = GetJobGauge<MCHGauge>();
                 if (gauge.IsOverheated && level >= MCH.Levels.HeatBlast)
                     return MCH.HeatBlast;
