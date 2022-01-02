@@ -98,6 +98,18 @@ namespace XIVComboExpandedestPlugin.Combos
         }
     }
 
+    internal class RedMageMoulinetReminderFeature : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.RedMageMoulinetReminderFeature;
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            var gauge = GetJobGauge<RDMGauge>();
+
+            return (gauge.BlackMana < 60 || gauge.WhiteMana < 60) && gauge.ManaStacks == 0 && level >= RDM.Levels.Verflare && OriginalHook(RDM.Verthunder2) != RDM.Verflare && OriginalHook(RDM.Jolt2) == RDM.Jolt2 ? SMN.Physick : actionID;
+        }
+    }
+
     internal class RedMageMeleeCombo : CustomCombo
     {
         protected override CustomComboPreset Preset => CustomComboPreset.RedMageMeleeCombo;
@@ -107,6 +119,9 @@ namespace XIVComboExpandedestPlugin.Combos
             if (actionID == RDM.Redoublement || actionID == RDM.Moulinet)
             {
                 var gauge = GetJobGauge<RDMGauge>();
+
+                if (level >= RDM.Levels.Verflare && (gauge.BlackMana < 50 || gauge.WhiteMana < 50) && IsEnabled(CustomComboPreset.RedMageComboReminderFeature) && actionID == RDM.Redoublement && gauge.ManaStacks == 0 && OriginalHook(RDM.Verthunder2) != RDM.Verflare && OriginalHook(RDM.Jolt2) == RDM.Jolt2)
+                    return IsEnabled(CustomComboPreset.RedMageMeleeComboPlusVerholy) ? RDM.Verholy : RDM.Verflare;
 
                 if (IsEnabled(CustomComboPreset.RedMageMeleeComboPlus) && !IsEnabled(CustomComboPreset.RedMageMeleeComboPlusPlus))
                 {

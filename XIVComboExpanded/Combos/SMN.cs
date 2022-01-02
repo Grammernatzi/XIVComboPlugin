@@ -9,6 +9,7 @@ namespace XIVComboExpandedestPlugin.Combos
         public const byte JobID = 27;
 
         public const uint
+            Physick = 16230,
             Deathflare = 3582,
             EnkindlePhoenix = 16516,
             EnkindleBahamut = 7429,

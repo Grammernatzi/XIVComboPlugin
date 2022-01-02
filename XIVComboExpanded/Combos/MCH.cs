@@ -30,6 +30,7 @@ namespace XIVComboExpandedestPlugin.Combos
             QueenOverdrive = 16502,
             // Other
             Hypercharge = 17209,
+            Wildfire = 2878,
             HeatBlast = 7410,
             HotShot = 2872,
             Drill = 16498,
@@ -55,6 +56,7 @@ namespace XIVComboExpandedestPlugin.Combos
                 Hypercharge = 30,
                 HeatBlast = 35,
                 RookOverdrive = 40,
+                Wildfire = 45,
                 Ricochet = 50,
                 AutoCrossbow = 52,
                 HeatedSplitShot = 54,
@@ -77,9 +79,8 @@ namespace XIVComboExpandedestPlugin.Combos
             if (actionID == MCH.CleanShot || actionID == MCH.HeatedCleanShot)
             {
                 var gauge = GetJobGauge<MCHGauge>();
-                if (gauge.IsOverheated && level >= MCH.Levels.HeatBlast)
+                if (IsEnabled(CustomComboPreset.MachinistHypercomboFeature) && gauge.IsOverheated && level >= MCH.Levels.HeatBlast)
                     return MCH.HeatBlast;
-
                 if (comboTime > 0)
                 {
                     if (lastComboMove == MCH.SplitShot && level >= MCH.Levels.SlugShot)
@@ -114,6 +115,16 @@ namespace XIVComboExpandedestPlugin.Combos
         }
     }
 
+    internal class MachinistHyperfireFeature : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.MachinistHyperfireFeature;
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            return IsActionOffCooldown(MCH.Wildfire) && level >= MCH.Levels.Wildfire ? MCH.Wildfire : actionID;
+        }
+    }
+
     internal class MachinistOverheatFeature : CustomCombo
     {
         protected override CustomComboPreset Preset => CustomComboPreset.MachinistOverheatFeature;
@@ -122,6 +133,8 @@ namespace XIVComboExpandedestPlugin.Combos
         {
             if (actionID == MCH.HeatBlast || actionID == MCH.AutoCrossbow)
             {
+                if (IsEnabled(CustomComboPreset.MachinistHyperfireFeature) && IsActionOffCooldown(MCH.Wildfire) && level >= MCH.Levels.Wildfire)
+                    return MCH.Wildfire;
                 var gauge = GetJobGauge<MCHGauge>();
                 if (!gauge.IsOverheated && level >= MCH.Levels.Hypercharge)
                     return MCH.Hypercharge;

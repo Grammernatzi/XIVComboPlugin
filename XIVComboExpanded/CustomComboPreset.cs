@@ -94,8 +94,12 @@ namespace XIVComboExpandedestPlugin
         BlackScatheFeature = 2507,
 
         [OrderedEnum]
-        [CustomComboInfo("Xenoglossy/Foul to Amplifier", "Xenoglossy/Foul become Amplifier when it's available and the GCD has more than 0.5s remaining, or you have no target.", BLM.JobID, BLM.Xenoglossy, BLM.Foul)]
+        [CustomComboInfo("Xenoglossy/Foul to Amplifier", "Xenoglossy/Foul become Amplifier when it's available, the GCD has more than 0.5s remaining, and you have less than two Polyglot stacks, or if you have no target or have no Polyglot.", BLM.JobID, BLM.Xenoglossy, BLM.Foul)]
         BlackXenoAmpFeature = 2512,
+
+        [OrderedEnum]
+        [CustomComboInfo("Thunder 3/4 to Sharpcast", "Thunder 3/4 become Sharpcast when it is available, the GCD has more than 0.5s remaining, and the effect is not currently up, or if you have no target.", BLM.JobID, BLM.Thunder, BLM.Thunder2, BLM.Thunder3, BLM.Thunder4)]
+        BlackSharpThunderFeature = 2513,
 
         #endregion
         // ====================================================================================
@@ -257,6 +261,11 @@ namespace XIVComboExpandedestPlugin
         GunbreakerSolidBarrelCombo = 3701,
 
         [OrderedEnum]
+        [ParentCombo(GunbreakerSolidBarrelCombo)]
+        [CustomComboInfo("Burst Strike Feature", "In addition to the Solid Barrel Combo, add Burst Strike when charges are full.", GNB.JobID, GNB.SolidBarrel)]
+        GunbreakerBurstStrikeFeature = 3710,
+
+        [OrderedEnum]
         [CustomComboInfo("Gnashing Fang Continuation", "Replace Gnashing Fang with Continuation when appropriate.", GNB.JobID, GNB.GnashingFang)]
         GunbreakerGnashingFangContinuation = 3702,
 
@@ -291,6 +300,11 @@ namespace XIVComboExpandedestPlugin
         [CustomComboInfo("No Mercy Feature", "Replace No Mercy with Bow Shock, and then Sonic Break, while No Mercy is active.", GNB.JobID, GNB.NoMercy)]
         GunbreakerNoMercyFeature = 3708,
 
+        [OrderedEnum]
+        [SecretCustomCombo]
+        [CustomComboInfo("Double Down Feature", "Replace Burst Strike and Fated Circle with Double Down when available.", GNB.JobID, GNB.BurstStrike, GNB.FatedCircle)]
+        GunbreakerDoubleDownFeature = 3711,
+
         #endregion
         // ====================================================================================
         #region MACHINIST
@@ -308,8 +322,17 @@ namespace XIVComboExpandedestPlugin
         MachinistOverheatFeature = 3103,
 
         [OrderedEnum]
+        [ParentCombo(MachinistMainCombo)]
+        [CustomComboInfo("Hypercharge Combo Feature", "Replace Clean Shot combo with Heat Blast while overheated.", MCH.JobID, MCH.CleanShot, MCH.HeatedCleanShot)]
+        MachinistHypercomboFeature = 3108,
+
+        [OrderedEnum]
         [CustomComboInfo("Overdrive Feature", "Replace Rook Autoturret and Automaton Queen with Overdrive while active.", MCH.JobID, MCH.RookAutoturret, MCH.AutomatonQueen)]
         MachinistOverdriveFeature = 3104,
+
+        [OrderedEnum]
+        [CustomComboInfo("Hypercharge to Wildfire", "Hypercharge becomes Wildfire if Wildfire is off-cooldown.", MCH.JobID, MCH.Hypercharge)]
+        MachinistHyperfireFeature = 3107,
 
         [OrderedEnum]
         [SecretCustomCombo]
@@ -345,6 +368,11 @@ namespace XIVComboExpandedestPlugin
         MonkSTComboFormOption = 2008,
 
         [OrderedEnum]
+        [ParentCombo(MonkSTCombo)]
+        [CustomComboInfo("Monk Meditation Reminder", "Your single-target combo buttons become Meditate out of combat if you don't have the Fifth Chakra open.", MNK.JobID, MNK.TwinSnakes, MNK.TrueStrike, MNK.FormShift)]
+        MonkMeditationReminder = 2013,
+
+        [OrderedEnum]
         [CustomComboInfo("Monk AoE Combo", "Replaces Masterful Blitz (for bug reasons) with the AoE combo chain, or whatever your most damaging move is when Perfect Balance is active.\nFour-Point Fury becomes AoE combo chain in order of forms during Perfect Balance.\nMasterful Blitz replaces the AoE combo when you have 3 Beast Chakra.", MNK.JobID, MNK.MasterfulBlitz, MNK.FourPointFury, MNK.FormShift)]
         MonkAoECombo = 2001,
 
@@ -372,8 +400,21 @@ namespace XIVComboExpandedestPlugin
         MonkHowlingFistMeditationFeature = 2003,
 
         [OrderedEnum]
+        [ParentCombo(MonkAoECombo)]
+        [CustomComboInfo("AoE Meditation Feature", "Replaces AoE combo with Howling Fist/Enlightment if you have the Fifth Chakra open and have a target.", MNK.JobID, MNK.MasterfulBlitz)]
+        MonkAoEMeditationFeature = 2014,
+
+        [OrderedEnum]
         [CustomComboInfo("Perfect Balance Feature", "Perfect Balance becomes Masterful Blitz while you have 3 Beast Chakra.", MNK.JobID, MNK.PerfectBalance)]
         MonkPerfectBalanceFeature = 2004,
+
+        [OrderedEnum]
+        [CustomComboInfo("Riddle of Fire to Brotherhood", "Riddle of Fire becomes Brotherhood if the former is on cooldown and the latter is not.", MNK.JobID, MNK.RiddleOfFire)]
+        MonkRiddleToBrotherFeature = 2011,
+
+        [OrderedEnum]
+        [CustomComboInfo("Riddle of Fire to Riddle of Wind", "Riddle of Fire becomes Riddle of Wind if the former is on cooldown and the latter is not.\nIf Riddle of Fire to Brotherhood is enabled, Brotherhood takes priority.", MNK.JobID, MNK.RiddleOfFire)]
+        MonkRiddleToRiddleFeature = 2012,
 
         #endregion
         // ====================================================================================
@@ -573,6 +614,11 @@ namespace XIVComboExpandedestPlugin
 
         [OrderedEnum]
         [ParentCombo(RedMageMeleeCombo)]
+        [CustomComboInfo("Redoublement Combo Lockout Feature", "Prevents you from using Redoublement combo if you have less than 50/50 gauge and have Verflare unlocked by replacing it with Verflare (which is unusable).", RDM.JobID, RDM.Redoublement)]
+        RedMageComboReminderFeature = 3515,
+
+        [OrderedEnum]
+        [ParentCombo(RedMageMeleeCombo)]
         [CustomComboInfo("Redoublement Combo Plus", "Replaces Redoublement/Moulinet with the combo spells after you have gained 3 mana stacks.\nVerflare will always be picked, meaning you must still manually press Verholy if appropriate.", RDM.JobID, RDM.Redoublement, RDM.Moulinet)]
         RedMageMeleeComboPlus = 3508,
 
@@ -622,6 +668,10 @@ namespace XIVComboExpandedestPlugin
         [OrderedEnum]
         [CustomComboInfo("Fleche to Contre-Sixte", "Replaces Fleche with Contre-Sixte if the former is on cooldown and the latter is not.", RDM.JobID, RDM.Fleche)]
         RedMageContreSixteFeature = 3513,
+
+        [OrderedEnum]
+        [CustomComboInfo("Moulinet Lockout Feature", "Prevents you from using Moulinet below 60/60 gauge by replacing it with Physick if you have Verflare unlocked.", RDM.JobID, RDM.Moulinet)]
+        RedMageMoulinetReminderFeature = 3514,
 
         #endregion
         // ====================================================================================

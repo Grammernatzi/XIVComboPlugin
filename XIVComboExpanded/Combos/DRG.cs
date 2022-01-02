@@ -96,7 +96,7 @@ namespace XIVComboExpandedestPlugin.Combos
             if (actionID == DRG.CoerthanTorment)
             {
                 var gauge = GetJobGauge<DRGGauge>();
-                if (gauge.FirstmindsFocusCount == 2)
+                if (gauge.FirstmindsFocusCount == 2 && IsEnabled(CustomComboPreset.DragoonWyrmwindFeature))
                     return DRG.WyrmwindThrust;
 
                 if (comboTime > 0)

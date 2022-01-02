@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 
+using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Game.ClientState.JobGauge.Types;
 using Dalamud.Game.ClientState.Statuses;
 
@@ -27,7 +28,10 @@ namespace XIVComboExpandedestPlugin.Combos
             HowlingFist = 25763,
             Enlightenment = 16474,
             MasterfulBlitz = 25764,
-            ShadowOfTheDestroyer = 25767;
+            ShadowOfTheDestroyer = 25767,
+            RiddleOfFire = 7395,
+            Brotherhood = 7396,
+            RiddleOfWind = 25766;
 
         public static class Buffs
         {
@@ -60,7 +64,9 @@ namespace XIVComboExpandedestPlugin.Combos
                 DragonKick = 50,
                 FormShift = 52,
                 MasterfulBlitz = 60,
-                Enlightenment = 70,
+                Brotherhood = 70,
+                RiddleOfWind = 72,
+                Enlightenment = 74,
                 ShadowOfTheDestroyer = 82;
         }
     }
@@ -73,6 +79,9 @@ namespace XIVComboExpandedestPlugin.Combos
         {
             if (OriginalHook(MNK.MasterfulBlitz) != MNK.MasterfulBlitz && level >= MNK.Levels.MasterfulBlitz)
                 return OriginalHook(MNK.MasterfulBlitz);
+
+            if (IsEnabled(CustomComboPreset.MonkMeditationReminder) && OriginalHook(MNK.Meditation) == MNK.Meditation && !HasCondition(ConditionFlag.InCombat) && level >= MNK.Levels.Meditation)
+                return MNK.Meditation;
 
             if (!HasEffect(MNK.Buffs.PerfectBalance) && !HasEffect(MNK.Buffs.FormlessFist) && (actionID == MNK.TrueStrike || actionID == MNK.TwinSnakes))
             {
@@ -196,6 +205,9 @@ namespace XIVComboExpandedestPlugin.Combos
 
             if (actionID == MNK.MasterfulBlitz)
             {
+                if (IsEnabled(CustomComboPreset.MonkAoEMeditationFeature) && OriginalHook(MNK.Meditation) != MNK.Meditation && level >= MNK.Levels.HowlingFist && LocalPlayer?.TargetObject is not null && HasCondition(ConditionFlag.InCombat))
+                    return OriginalHook(MNK.HowlingFist);
+
                 if (OriginalHook(MNK.MasterfulBlitz) != MNK.MasterfulBlitz && level >= MNK.Levels.MasterfulBlitz)
                     return OriginalHook(MNK.MasterfulBlitz);
 
@@ -294,6 +306,26 @@ namespace XIVComboExpandedestPlugin.Combos
             }
 
             return actionID;
+        }
+    }
+
+    internal class MonkRiddleToBrotherFeature : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.MonkRiddleToBrotherFeature;
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            return (IsActionOffCooldown(MNK.Brotherhood) && !IsActionOffCooldown(MNK.RiddleOfFire) && level >= MNK.Levels.Brotherhood) ? MNK.Brotherhood : actionID;
+        }
+    }
+
+    internal class MonkRiddleToRiddleFeature : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.MonkRiddleToRiddleFeature;
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            return (IsActionOffCooldown(MNK.RiddleOfWind) && !IsActionOffCooldown(MNK.RiddleOfFire) && level >= MNK.Levels.RiddleOfWind) ? MNK.RiddleOfWind : actionID;
         }
     }
 
