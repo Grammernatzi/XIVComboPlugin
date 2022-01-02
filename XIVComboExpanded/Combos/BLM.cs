@@ -89,9 +89,9 @@ namespace XIVComboExpandedestPlugin.Combos
                         return BLM.Blizzard3;
                 }
 
-                if (gauge.ElementTimeRemaining < 3050 && HasEffect(BLM.Buffs.Firestarter) && CustomCombo.IsEnabled(CustomComboPreset.BlackFire4Auto))
+                if (gauge.InAstralFire && gauge.ElementTimeRemaining < 3050 && HasEffect(BLM.Buffs.Firestarter) && CustomCombo.IsEnabled(CustomComboPreset.BlackFire4Auto))
                     return BLM.Fire3;
-                if (gauge.ElementTimeRemaining < 4800 && !HasEffect(BLM.Buffs.Firestarter) && CustomCombo.IsEnabled(CustomComboPreset.BlackFire4Auto))
+                if (gauge.InAstralFire && gauge.ElementTimeRemaining < 4800 && !HasEffect(BLM.Buffs.Firestarter) && CustomCombo.IsEnabled(CustomComboPreset.BlackFire4Auto))
                     return OriginalHook(BLM.Fire);
 
                 if (gauge.InUmbralIce && gauge.UmbralHearts == 3 && LocalPlayer?.CurrentMp >= 9600)
