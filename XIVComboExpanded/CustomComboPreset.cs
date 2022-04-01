@@ -1352,6 +1352,11 @@ namespace XIVComboExpandedestPlugin
         WarriorStormsPathahawkFeature = 2110,
 
         [OrderedEnum]
+        [ParentCombo(WarriorStormsPathCombo)]
+        [CustomComboInfo("Storms Path to Storms Eye", "Replace Storms Path with Storms Eye when Surging Tempest is not active.", WAR.JobID, WAR.StormsPath)]
+        WarriorStormsPathtoStormsEyeFeature = 2116,
+
+        [OrderedEnum]
         [CustomComboInfo("Storms Eye Combo", "Replace Storms Eye with its combo chain", WAR.JobID, WAR.StormsEye)]
         WarriorStormsEyeCombo = 2102,
 

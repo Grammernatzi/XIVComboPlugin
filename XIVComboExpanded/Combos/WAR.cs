@@ -36,7 +36,8 @@ namespace XIVComboExpandedestPlugin.Combos
             public const ushort
                 InnerRelease = 1177,
                 NascentChaos = 1897,
-                PrimalRendReady = 2624;
+                PrimalRendReady = 2624,
+                SurgingTempest = 2677;
         }
 
         public static class Debuffs
@@ -71,6 +72,14 @@ namespace XIVComboExpandedestPlugin.Combos
                 if (IsEnabled(CustomComboPreset.WarriorInnerReleaseFeature) && HasEffect(WAR.Buffs.InnerRelease))
                 {
                     return OriginalHook(WAR.FellCleave);
+                }
+
+                if (IsEnabled(CustomComboPreset.WarriorStormsPathtoStormsEyeFeature))
+                {
+                    if (lastComboMove == WAR.Maim && CanUseAction(WAR.StormsEye) && !HasEffect(WAR.Buffs.SurgingTempest))
+                    {
+                        return OriginalHook(WAR.StormsEye);
+                    }
                 }
 
                 if (IsEnabled(CustomComboPreset.WarriorStormsPathahawkFeature))
