@@ -42,7 +42,7 @@ namespace XIVComboExpandedestPlugin
 
             this.GetAdjustedActionId = scanner.ScanText("E8 ?? ?? ?? ?? 8B F8 3B DF");  // Client::Game::ActionManager.GetAdjustedActionId
 
-            this.IsActionIdReplaceable = scanner.ScanText("81 F9 ?? ?? ?? ?? 7F 35");
+            this.IsActionIdReplaceable = scanner.ScanText("E8 ?? ?? ?? ?? 84 C0 74 4C 8B D3");
 
             this.GetActionCooldown = scanner.ScanText("E8 ?? ?? ?? ?? 48 85 C0 74 18 80 38 00");
 
