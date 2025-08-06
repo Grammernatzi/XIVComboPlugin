@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Authors>attick, daemitus, alymphocyte, grammernatzi</Authors>
     <Company>-</Company>
-    <Version>1.5.0.81</Version>
+    <Version>1.5.0.82</Version>
     <Description>This plugin condenses combos and mutually exclusive abilities onto a single button.</Description>
     <Copyright>Copyaaaaaaaaaaaa</Copyright>
     <PackageProjectUrl>https://github.com/grammernatzi/XIVComboPluginExpandedest</PackageProjectUrl>

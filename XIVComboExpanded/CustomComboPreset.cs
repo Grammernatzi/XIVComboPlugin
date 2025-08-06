@@ -1624,7 +1624,7 @@ namespace XIVComboExpandedestPlugin
 
         [OrderedEnum]
         [SecretCustomCombo]
-        [CustomComboInfo("Reawakened Fangs", "Steel Fangs will become your entire Reawakening combo while it is available.", VPR.JobID, VPR.SteelFangs)]
+        [CustomComboInfo("Reawakened Fangs", "Steel Fangs/Maw will become your entire Reawakening combo while it is available.", VPR.JobID, VPR.SteelFangs, VPR.SteelMaw)]
         ViperReawakenedFangsFeature = 4113,
 
         #endregion

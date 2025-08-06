@@ -7,7 +7,10 @@
   "IconUrl": "https://raw.githubusercontent.com/grammernatzi/XIVComboPluginExpandedest/master/res/icon.png",
   "ImageUrls": [],
   "DalamudApiLevel": 13,
-  "Changelog": "1.5.0.79:
+  "Changelog": "1.5.0.82:
+    * Reawakened Fangs Feature now also applies to Steel Maw.
+    
+    1.5.0.79:
     * Phlegma into Eukrasian Dyskrasia added.
     
     1.5.0.73:
