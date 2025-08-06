@@ -94,6 +94,7 @@ namespace XIVComboExpandedestPlugin.Combos
             RDM.Impact,
             RDM.Scatter,
             RDM.GrandImpact,
+            BLM.FlareStar,
             3545, // Elixir Field
             25882, // Flint Strike
             3543, // Tornado Kick
