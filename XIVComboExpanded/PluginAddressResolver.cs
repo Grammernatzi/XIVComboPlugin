@@ -36,7 +36,7 @@ namespace XIVComboExpandedestPlugin
         /// Set up memory signatures.
         /// </summary>
         /// <param name="scanner">Signature scanner.</param>
-        public unsafe void Setup(ISigScanner scanner)
+        public unsafe new void Setup(ISigScanner scanner)
         {
             this.ComboTimer = new IntPtr(&ActionManager.Instance()->Combo.Timer);
 

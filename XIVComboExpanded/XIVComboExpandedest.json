@@ -6,7 +6,7 @@
   "RepoUrl": "https://github.com/Grammernatzi/XIVComboPluginExpandedest",
   "IconUrl": "https://raw.githubusercontent.com/grammernatzi/XIVComboPluginExpandedest/master/res/icon.png",
   "ImageUrls": [],
-  "DalamudApiLevel": 13,
+  "DalamudApiLevel": 14,
   "Changelog": "1.5.0.82:
     * Reawakened Fangs Feature now also applies to Steel Maw.
     

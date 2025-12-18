@@ -122,7 +122,7 @@ namespace XIVComboExpandedestPlugin
                 if (this.tick.ElapsedMilliseconds > 10)
                 {
                     this.tick.Restart();
-                    var localPlayer = Service.ClientState.LocalPlayer;
+                    var localPlayer = Service.ObjectTable.LocalPlayer;
                     Vector2 newPosition = localPlayer is null ? Vector2.Zero : new Vector2(localPlayer.Position.X, localPlayer.Position.Z);
 
                     this.playerSpeed = Vector2.Distance(newPosition, this.position);
@@ -144,7 +144,7 @@ namespace XIVComboExpandedestPlugin
 
             try
             {
-                var localPlayer = Service.ClientState.LocalPlayer;
+                var localPlayer = Service.ObjectTable.LocalPlayer;
                 if (localPlayer == null || !this.comboActionIDs.Contains(actionID))
                     return this.OriginalHook(actionID);
 
