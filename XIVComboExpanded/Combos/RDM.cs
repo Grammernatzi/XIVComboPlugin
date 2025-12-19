@@ -56,7 +56,8 @@ namespace XIVComboExpandedestPlugin.Combos
                 EmboldenSelfBuff = 1239,
                 EmboldenRaidBuff = 1297,
                 LostChainspell = 2560,
-                MagickedSwordplay = 3875;
+                MagickedSwordplay = 3875,
+                Manafication = 1971;
         }
 
         public static class Debuffs
@@ -184,10 +185,11 @@ namespace XIVComboExpandedestPlugin.Combos
                     if (lastComboMove == RDM.Zwerchhau && level >= RDM.Levels.Redoublement)
                         return OriginalHook(RDM.Redoublement);
 
-                    if (gauge.ManaStacks == 0 && IsEnabled(CustomComboPreset.RedMageMeleeComboReprise) && level >= RDM.Levels.Reprise && OriginalHook(RDM.Reprise) != RDM.Reprise
-                        &&
-                        (!InMeleeRange() || (IsEnabled(CustomComboPreset.RedMageMeleeComboRepriseOption) && ((gauge.BlackMana < manaCheck || gauge.WhiteMana < manaCheck) && !HasEffect(RDM.Buffs.MagickedSwordplay)))))
-                        return OriginalHook(RDM.Reprise);
+                    if (!HasEffect(RDM.Buffs.Manafication))
+                        if (gauge.ManaStacks == 0 && IsEnabled(CustomComboPreset.RedMageMeleeComboReprise) && level >= RDM.Levels.Reprise && OriginalHook(RDM.Reprise) != RDM.Reprise
+                            &&
+                            (!InMeleeRange() || (IsEnabled(CustomComboPreset.RedMageMeleeComboRepriseOption) && ((gauge.BlackMana < manaCheck || gauge.WhiteMana < manaCheck) && !HasEffect(RDM.Buffs.MagickedSwordplay)))))
+                            return OriginalHook(RDM.Reprise);
                 }
 
                 if (level >= RDM.Levels.Verflare && IsEnabled(CustomComboPreset.RedMageComboReminderFeature) && actionID == RDM.Redoublement && gauge.ManaStacks == 0 && OriginalHook(RDM.Verthunder2) != RDM.Verflare && (OriginalHook(RDM.Jolt2) != RDM.Scorch && OriginalHook(RDM.Jolt2) != RDM.Resolution) && ((gauge.BlackMana < manaCheck || gauge.WhiteMana < manaCheck) && !HasEffect(RDM.Buffs.MagickedSwordplay)))

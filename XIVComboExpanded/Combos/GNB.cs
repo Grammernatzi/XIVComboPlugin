@@ -203,6 +203,48 @@ namespace XIVComboExpandedestPlugin.Combos
         }
     }
 
+    internal class GunbreakerBloodfestOvercapFeature : CustomCombo
+    {
+        protected override CustomComboPreset Preset => CustomComboPreset.GunbreakerBloodfestNoMercyFeature;
+
+        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
+        {
+            if (actionID == GNB.Bloodfest)
+            {
+                if (!CanUseAction(GNB.Bloodfest)) return GNB.NoMercy;
+                if (!IsActionOffCooldown(GNB.Bloodfest))
+                {
+                    if (IsActionOffCooldown(GNB.NoMercy)) return GNB.NoMercy;
+
+                    if (IsEnabled(CustomComboPreset.GunbreakerNoMercyDoubleDownFeature))
+                    {
+                        var gauge = GetJobGauge<GNBGauge>();
+                        if (gauge.Ammo >= 1 && (HasEffect(GNB.Buffs.NoMercy) || CanUseAction(OriginalHook(GNB.ReignOfBeasts))))
+                        {
+                            if (GetCooldown(GNB.SolidBarrel).CooldownRemaining >= 0.5 && IsActionOffCooldown(GNB.BowShock) && IsEnabled(CustomComboPreset.GunbreakerNoMercyFeature))
+                                return GNB.BowShock;
+                            if (IsActionOffCooldown(GNB.DoubleDown) && level >= GNB.Levels.DoubleDown)
+                                return GNB.DoubleDown;
+                        }
+                    }
+
+                    if (IsEnabled(CustomComboPreset.GunbreakerNoMercyFeature))
+                    {
+                        if (HasEffect(GNB.Buffs.NoMercy) || CanUseAction(OriginalHook(GNB.ReignOfBeasts)))
+                        {
+                            if ((GetCooldown(GNB.SolidBarrel).CooldownRemaining >= 0.5 || OriginalHook(GNB.NoMercy) == GNB.NoMercy) && IsActionOffCooldown(GNB.BowShock))
+                                return GNB.BowShock;
+                        }
+                    }
+
+                    if (CanUseAction(GNB.SonicBreak)) return GNB.SonicBreak;
+                }
+            }
+
+            return actionID;
+        }
+    }
+
     internal class GunbreakerBurstHeartFeature : CustomCombo
     {
         protected override CustomComboPreset Preset => CustomComboPreset.GunbreakerBurstHeartFeature;
@@ -211,27 +253,6 @@ namespace XIVComboExpandedestPlugin.Combos
         {
             if (CanUseAction(OriginalHook(GNB.ReignOfBeasts)))
                 return OriginalHook(GNB.ReignOfBeasts);
-            return actionID;
-        }
-    }
-
-    internal class GunbreakerBloodfestOvercapFeature : CustomCombo
-    {
-        protected override CustomComboPreset Preset => CustomComboPreset.GunbreakerBloodfestOvercapFeature;
-
-        protected override uint Invoke(uint actionID, uint lastComboMove, float comboTime, byte level)
-        {
-            if (actionID == GNB.BurstStrike || actionID == GNB.FatedCircle)
-            {
-                if (actionID == GNB.BurstStrike && IsEnabled(CustomComboPreset.GunbreakerBurstStrikeCont) && level >= GNB.Levels.EnhancedContinuation && HasEffect(GNB.Buffs.ReadyToBlast))
-                    return GNB.Hypervelocity;
-                if ((actionID == GNB.FatedCircle || (actionID == GNB.BurstStrike && IsEnabled(CustomComboPreset.GunbreakerBurstStrikeToFatedCircleFeature))) && IsEnabled(CustomComboPreset.GunbreakerFatedCircleContinuation) && OriginalHook(GNB.Continuation) == GNB.FatedBrand)
-                    return GNB.FatedBrand;
-                var gauge = GetJobGauge<GNBGauge>();
-                if (gauge.Ammo == 0 && level >= GNB.Levels.Bloodfest)
-                    return GNB.Bloodfest;
-            }
-
             return actionID;
         }
     }

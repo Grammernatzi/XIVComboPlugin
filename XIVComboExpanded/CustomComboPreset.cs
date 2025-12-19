@@ -533,7 +533,7 @@ namespace XIVComboExpandedestPlugin
         // ====================================================================================
         #region GUNBREAKER
 
-        // last used enum: 3718
+        // last used enum: 3719
 
         [OrderedEnum]
         [CustomComboInfo("Solid Barrel Combo", "Replace Solid Barrel with its combo chain.", GNB.JobID, GNB.SolidBarrel)]
@@ -586,10 +586,6 @@ namespace XIVComboExpandedestPlugin
         GunbreakerBurstStrikeToFatedCircleFeature = 3715,
 
         [OrderedEnum]
-        [CustomComboInfo("Burst Strike/Fated Circle to Bloodfest", "Replace Burst Strike and Fated Circle with Bloodfest if you have no powder gauge.", GNB.JobID, GNB.BurstStrike, GNB.FatedCircle)]
-        GunbreakerBloodfestOvercapFeature = 3707,
-
-        [OrderedEnum]
         [CustomComboInfo("Burst Strike/Fated Circle to Double Down", "Replace Burst Strike and Fated Circle with Double Down when it is available.", GNB.JobID, GNB.BurstStrike, GNB.FatedCircle)]
         GunbreakerDoubleDownFeature = 3711,
 
@@ -604,6 +600,10 @@ namespace XIVComboExpandedestPlugin
         [OrderedEnum]
         [CustomComboInfo("No Mercy to Double Down", "Replace No Mercy with Double Down while No Mercy is active and it is off-cooldown.\nThis takes priority over Bow Shock/Sonic Break if the No Mercy feature is enabled.", GNB.JobID, GNB.NoMercy)]
         GunbreakerNoMercyDoubleDownFeature = 3712,
+
+        [OrderedEnum]
+        [CustomComboInfo("Bloodfest to No Mercy", "Replace Bloodfest with No Mercy while only the former of the two is on cooldown.", GNB.JobID, GNB.Bloodfest)]
+        GunbreakerBloodfestNoMercyFeature = 3719,
 
         #endregion
         // ====================================================================================

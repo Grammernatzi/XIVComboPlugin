@@ -222,7 +222,7 @@ namespace XIVComboExpandedestPlugin.Combos
             {
                 var gauge = GetJobGauge<BLMGauge>();
 
-                if (!gauge.IsEnochianActive) return actionID;
+                if (!gauge.InAstralFire && !gauge.InUmbralIce) return actionID;
 
                 if (gauge.InUmbralIce)
                 {
