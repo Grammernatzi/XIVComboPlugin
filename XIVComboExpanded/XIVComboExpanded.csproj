@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Dalamud.NET.Sdk/13.0.0">
+<Project Sdk="Dalamud.NET.Sdk/14.0.0">
   <PropertyGroup>
     <Authors>attick, daemitus, alymphocyte, grammernatzi</Authors>
     <Company>-</Company>
@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <TargetFramework>net9.0-windows</TargetFramework>
+    <TargetFramework>net10.0-windows</TargetFramework>
     <Platforms>x64</Platforms>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
@@ -43,7 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DalamudPackager" Version="13.0.0" />
+    <PackageReference Include="DalamudPackager" Version="14.0.1" />
 	<PackageReference Include="ILRepack" Version="2.1.0-beta1" GeneratePathProperty="true" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556">
       <PrivateAssets>all</PrivateAssets>

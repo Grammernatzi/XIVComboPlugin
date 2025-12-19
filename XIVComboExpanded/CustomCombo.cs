@@ -261,7 +261,7 @@ namespace XIVComboExpandedestPlugin.Combos
         /// </summary>
         /// <param name="effectID">Status effect ID.</param>
         /// <returns>Status object or null.</returns>
-        protected static Status? FindEffect(ushort effectID) => FindEffect(effectID, LocalPlayer, (uint)LocalPlayer?.GameObjectId);
+        protected static IStatus? FindEffect(ushort effectID) => FindEffect(effectID, LocalPlayer, (uint)LocalPlayer?.GameObjectId);
 
         /// <summary>
         /// Find if an effect on the target exists.
@@ -277,7 +277,7 @@ namespace XIVComboExpandedestPlugin.Combos
         /// </summary>
         /// <param name="effectID">Status effect ID.</param>
         /// <returns>Status object or null.</returns>
-        protected static Status? FindTargetEffect(ushort effectID) => FindEffect(effectID, CurrentTarget, (uint)LocalPlayer?.GameObjectId);
+        protected static IStatus? FindTargetEffect(ushort effectID) => FindEffect(effectID, CurrentTarget, (uint)LocalPlayer?.GameObjectId);
 
         /// <summary>
         /// Find if an effect on the player exists.
@@ -293,7 +293,7 @@ namespace XIVComboExpandedestPlugin.Combos
         /// </summary>
         /// <param name="effectID">Status effect ID.</param>
         /// <returns>Status object or null.</returns>
-        protected static Status? FindEffectAny(ushort effectID) => FindEffect(effectID, LocalPlayer, null);
+        protected static IStatus? FindEffectAny(ushort effectID) => FindEffect(effectID, LocalPlayer, null);
 
         /// <summary>
         /// Find if an effect on the target exists.
@@ -309,7 +309,7 @@ namespace XIVComboExpandedestPlugin.Combos
         /// </summary>
         /// <param name="effectID">Status effect ID.</param>
         /// <returns>Status object or null.</returns>
-        protected static Status? FindTargetEffectAny(ushort effectID) => FindEffect(effectID, CurrentTarget, null);
+        protected static IStatus? FindTargetEffectAny(ushort effectID) => FindEffect(effectID, CurrentTarget, null);
 
         /// <summary>
         /// Finds an effect on the given object.
@@ -318,7 +318,7 @@ namespace XIVComboExpandedestPlugin.Combos
         /// <param name="obj">Object to look for effects on.</param>
         /// <param name="sourceID">Source object ID.</param>
         /// <returns>Status object or null.</returns>
-        protected static Status? FindEffect(ushort effectID, IGameObject? obj, uint? sourceID)
+        protected static IStatus? FindEffect(ushort effectID, IGameObject? obj, uint? sourceID)
         {
             if (obj is null)
                 return null;
