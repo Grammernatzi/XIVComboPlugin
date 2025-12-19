@@ -206,7 +206,7 @@ namespace XIVComboExpandedestPlugin.Combos
         /// <summary>
         /// Gets the player or null.
         /// </summary>
-        protected static IPlayerCharacter? LocalPlayer => Service.ClientState.LocalPlayer;
+        protected static IPlayerCharacter? LocalPlayer => Service.ObjectTable.LocalPlayer;
 
         /// <summary>
         /// Gets the current target or null.

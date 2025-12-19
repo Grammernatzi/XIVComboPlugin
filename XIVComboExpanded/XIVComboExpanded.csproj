@@ -43,7 +43,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DalamudPackager" Version="14.0.1" />
 	<PackageReference Include="ILRepack" Version="2.1.0-beta1" GeneratePathProperty="true" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556">
       <PrivateAssets>all</PrivateAssets>
@@ -76,6 +75,10 @@
 		<HintPath>$(DalamudLibPath)InteropGenerator.Runtime.dll</HintPath>
 		<Private>false</Private>
 	</Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="DalamudPackager" Version="14.0.1" />
   </ItemGroup>
 
   <Target Name="CleanOutDir" AfterTargets="ILRepack">
