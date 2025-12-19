@@ -104,5 +104,11 @@ namespace XIVComboExpandedestPlugin
         /// </summary>
         [PluginService]
         internal static IPluginLog PluginLog { get; private set; } = null!;
+
+        /// <summary>
+        /// Gets the Dalamud object table.
+        /// </summary>
+        [PluginService]
+        internal static IObjectTable ObjectTable { get; private set; } = null!;
     }
 }

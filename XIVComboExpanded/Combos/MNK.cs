@@ -288,7 +288,7 @@ namespace XIVComboExpandedestPlugin.Combos
         {
             if (actionID == (IsEnabled(CustomComboPreset.MonkAoEComboFormOption) ? MNK.FormShift : MNK.FourPointFury))
             {
-                Status? pb = FindEffect(MNK.Buffs.PerfectBalance);
+                IStatus? pb = FindEffect(MNK.Buffs.PerfectBalance);
 
                 var gauge = GetJobGauge<MNKGauge>();
 
