@@ -36,7 +36,8 @@ namespace XIVComboExpandedestPlugin.Combos
                 ReadyToRip = 1842,
                 ReadyToTear = 1843,
                 ReadyToGouge = 1844,
-                ReadyToBlast = 2686;
+                ReadyToBlast = 2686,
+                Bloodfest = 5051;
         }
 
         public static class Debuffs
@@ -88,6 +89,7 @@ namespace XIVComboExpandedestPlugin.Combos
                         {
                             var gauge = GetJobGauge<GNBGauge>();
                             var maxAmmo = level >= GNB.Levels.CartridgeCharge2 ? 3 : 2;
+                            if (HasEffect(GNB.Buffs.Bloodfest)) maxAmmo += maxAmmo;
 
                             if (IsEnabled(CustomComboPreset.GunbreakerBurstStrikeCont))
                             {
@@ -203,7 +205,7 @@ namespace XIVComboExpandedestPlugin.Combos
         }
     }
 
-    internal class GunbreakerBloodfestOvercapFeature : CustomCombo
+    internal class GunbreakerBloodfestNoMercyFeature : CustomCombo
     {
         protected override CustomComboPreset Preset => CustomComboPreset.GunbreakerBloodfestNoMercyFeature;
 
@@ -237,7 +239,7 @@ namespace XIVComboExpandedestPlugin.Combos
                         }
                     }
 
-                    if (CanUseAction(GNB.SonicBreak)) return GNB.SonicBreak;
+                    if (OriginalHook(GNB.NoMercy) == GNB.SonicBreak) return GNB.SonicBreak;
                 }
             }
 
@@ -294,6 +296,7 @@ namespace XIVComboExpandedestPlugin.Combos
                     {
                         var gauge = GetJobGauge<GNBGauge>();
                         var maxAmmo = level >= GNB.Levels.CartridgeCharge2 ? 3 : 2;
+                        if (HasEffect(GNB.Buffs.Bloodfest)) maxAmmo += maxAmmo;
 
                         if (gauge.Ammo == maxAmmo)
                         {
