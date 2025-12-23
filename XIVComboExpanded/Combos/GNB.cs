@@ -213,7 +213,7 @@ namespace XIVComboExpandedestPlugin.Combos
         {
             if (actionID == GNB.Bloodfest)
             {
-                if (!CanUseAction(GNB.Bloodfest)) return GNB.NoMercy;
+                if (!CanUseAction(GNB.Bloodfest)) return OriginalHook(GNB.NoMercy);
                 if (!IsActionOffCooldown(GNB.Bloodfest))
                 {
                     if (IsActionOffCooldown(GNB.NoMercy)) return GNB.NoMercy;
