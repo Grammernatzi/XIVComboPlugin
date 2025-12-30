@@ -272,17 +272,45 @@ namespace XIVComboExpandedestPlugin.Combos
                         if (level >= RDM.Levels.Jolt3 && level < RDM.Levels.VerprocBuff)
                             return OriginalHook(RDM.Jolt2);
                     }
+
+                    if (actionID == RDM.Verstone && HasEffect(RDM.Buffs.VerstoneReady))
+                    {
+                        if (IsEnabled(CustomComboPreset.RedMageVerprocComboVerstoneOption))
+                            return RDM.Verstone;
+
+                        if (IsEnabled(CustomComboPreset.RedMageVerprocCancelPrevention))
+                        {
+                            var verstoneEffect = FindEffect(RDM.Buffs.VerstoneReady);
+                            if (verstoneEffect != null && verstoneEffect.RemainingTime > 2)
+                                return RDM.Verstone;
+                        }
+                        else
+                        {
+                            return RDM.Verstone;
+                        }
+                    }
+
+                    if (blackMagic && HasEffect(RDM.Buffs.VerfireReady))
+                    {
+                        if (IsEnabled(CustomComboPreset.RedMageVerprocComboVerfireOption))
+                            return RDM.Verfire;
+
+                        if (IsEnabled(CustomComboPreset.RedMageVerprocCancelPrevention))
+                        {
+                            var verfireEffect = FindEffect(RDM.Buffs.VerfireReady);
+                            if (verfireEffect != null && verfireEffect.RemainingTime > 2)
+                                return RDM.Verfire;
+                        }
+                        else
+                        {
+                            return RDM.Verfire;
+                        }
+                    }
                 }
 
-                if (actionID == RDM.Verstone && HasEffect(RDM.Buffs.VerstoneReady))
-                    return RDM.Verstone;
-
-                if (blackMagic && HasEffect(RDM.Buffs.VerfireReady))
-                    return RDM.Verfire;
-
                 if ((blackMagic && !IsEnabled(CustomComboPreset.RedMageVerprocComboVerfireOption)) || (actionID == RDM.Verstone && !IsEnabled(CustomComboPreset.RedMageVerprocComboVerstoneOption)))
-                    return OriginalHook(RDM.Jolt2);
-            }
+                        return OriginalHook(RDM.Jolt2);
+                }
 
             return actionID;
         }

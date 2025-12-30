@@ -1216,12 +1216,15 @@ namespace XIVComboExpandedestPlugin
         [CustomComboInfo("Verproc into Jolt Plus Verthunder Option", "Verthunder is used as the base for the black magic side of Verproc into Jolt, not Verfire.\nThis is so you can use Verfire by itself even with acceleration up to use a slightly more optimal opener.", RDM.JobID, RDM.Verthunder)]
         RedMageVerprocComboVerthunderOption = 3526,
 
-
         [OrderedEnum]
         [ParentCombo(RedMageVerprocCombo)]
         [CustomComboInfo("Verproc to Jolt 3 Optimization", "Changes Verstone/Verfire to Jolt 3 when it is a DPS gain.", RDM.JobID, RDM.Verstone, RDM.Verfire)]
         RedMageVerprocJolt3Option = 3527,
 
+        [OrderedEnum]
+        [ParentCombo(RedMageVerprocCombo)]
+        [CustomComboInfo("Verproc Cancel Prevention", "Changes Verstone/Verfire to Jolt when their buff has 2 seconds or less remaining to prevent canceling the cast.", RDM.JobID, RDM.Verstone, RDM.Verfire)]
+        RedMageVerprocCancelPrevention = 3528,
 
         [OrderedEnum]
         [ParentCombo(RedMageVerprocComboPlus)]
