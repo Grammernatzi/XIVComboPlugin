@@ -281,7 +281,7 @@ namespace XIVComboExpandedestPlugin.Combos
                         if (IsEnabled(CustomComboPreset.RedMageVerprocCancelPrevention))
                         {
                             var verstoneEffect = FindEffect(RDM.Buffs.VerstoneReady);
-                            if (verstoneEffect != null && verstoneEffect.RemainingTime > Service.Configuration.VerprocCancelThreshold)
+                            if (verstoneEffect == null || verstoneEffect.RemainingTime < 0f || verstoneEffect.RemainingTime > Service.Configuration.VerprocCancelThreshold)
                                 return RDM.Verstone;
                         }
                         else
@@ -298,7 +298,7 @@ namespace XIVComboExpandedestPlugin.Combos
                         if (IsEnabled(CustomComboPreset.RedMageVerprocCancelPrevention))
                         {
                             var verfireEffect = FindEffect(RDM.Buffs.VerfireReady);
-                            if (verfireEffect != null && verfireEffect.RemainingTime > Service.Configuration.VerprocCancelThreshold)
+                            if (verfireEffect == null || verfireEffect.RemainingTime < 0f || verfireEffect.RemainingTime > Service.Configuration.VerprocCancelThreshold)
                                 return RDM.Verfire;
                         }
                         else
