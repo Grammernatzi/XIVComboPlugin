@@ -266,8 +266,13 @@ namespace XIVComboExpandedestPlugin.Combos
                     return OriginalHook(RDM.Reprise);
 
                 if ((blackMagic && !IsEnabled(CustomComboPreset.RedMageVerprocComboVerfireOption)) || (actionID == RDM.Verstone && !IsEnabled(CustomComboPreset.RedMageVerprocComboVerstoneOption)))
-                    if (level >= RDM.Levels.Jolt3 && level < RDM.Levels.VerprocBuff)
-                        return OriginalHook(RDM.Jolt2);
+                {
+                    if (IsEnabled(CustomComboPreset.RedMageVerprocJolt3Option))
+                    {
+                        if (level >= RDM.Levels.Jolt3 && level < RDM.Levels.VerprocBuff)
+                            return OriginalHook(RDM.Jolt2);
+                    }
+                }
 
                 if (actionID == RDM.Verstone && HasEffect(RDM.Buffs.VerstoneReady))
                     return RDM.Verstone;
