@@ -203,7 +203,7 @@ namespace XIVComboExpandedestPlugin.Combos
                         return BLM.Despair;
                 }
 
-                if (!gauge.IsEnochianActive) return actionID;
+                if (!gauge.InAstralFire && !gauge.InUmbralIce) return actionID;
 
                 return !gauge.InAstralFire ? (level < BLM.Levels.Blizzard4 ? BLM.Blizzard : BLM.Blizzard4) : (level < BLM.Levels.Fire4 ? BLM.Fire : BLM.Fire4);
             }
