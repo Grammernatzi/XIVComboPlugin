@@ -77,6 +77,11 @@ namespace XIVComboExpandedestPlugin
         public double LucidCooldownOffset { get; set; } = 0;
 
         /// <summary>
+        /// Gets or sets the threshold for Verproc Cancel Prevention. Default is 2.0.
+        /// </summary>
+        public float VerprocCancelThreshold { get; set; } = 2.0f;
+
+        /// <summary>
         /// Save the configuration to disk.
         /// </summary>
         public void Save()
