@@ -283,8 +283,7 @@ namespace XIVComboExpandedestPlugin.Combos
                             var verstoneEffect = FindEffect(RDM.Buffs.VerstoneReady);
                             if (verstoneEffect == null || verstoneEffect.RemainingTime < 0f || verstoneEffect.RemainingTime > Service.Configuration.VerprocCancelThreshold)
                                 return RDM.Verstone;
-                            if (!HasCondition(ConditionFlag.InCombat) && IsEnabled(CustomComboPreset.RedMageVerprocOpenerFeatureStone) &&
-                                level >= RDM.Levels.Veraero)
+                            if (!HasCondition(ConditionFlag.InCombat) && IsEnabled(CustomComboPreset.RedMageVerprocOpenerFeatureStone) && level >= RDM.Levels.Veraero)
                                 return OriginalHook(RDM.Veraero);
                         }
                         else
@@ -303,8 +302,7 @@ namespace XIVComboExpandedestPlugin.Combos
                             var verfireEffect = FindEffect(RDM.Buffs.VerfireReady);
                             if (verfireEffect == null || verfireEffect.RemainingTime < 0f || verfireEffect.RemainingTime > Service.Configuration.VerprocCancelThreshold)
                                 return RDM.Verfire;
-                            if (!HasCondition(ConditionFlag.InCombat) && IsEnabled(CustomComboPreset.RedMageVerprocOpenerFeatureFire) &&
-                                level >= RDM.Levels.Verthunder)
+                            if (!HasCondition(ConditionFlag.InCombat) && IsEnabled(CustomComboPreset.RedMageVerprocOpenerFeatureFire) && level >= RDM.Levels.Verthunder)
                                 return OriginalHook(RDM.Verthunder);
                         }
                         else

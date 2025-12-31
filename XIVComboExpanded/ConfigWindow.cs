@@ -254,7 +254,7 @@ namespace XIVComboExpandedestPlugin
 
                             ImGui.Indent();
                             var inputChanged = false;
-                            inputChanged |= ImGui.SliderFloat("Proc Cancel Threshold (seconds)", ref cancelThreshold, 1.90f, 2.50f, "%.2f");
+                            inputChanged |= ImGui.SliderFloat("Proc Cancel Threshold (seconds)", ref cancelThreshold, 1.90f, 3.00f, "%.2f");
                             ImGui.Unindent();
 
                             if (inputChanged)
