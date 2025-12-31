@@ -266,18 +266,55 @@ namespace XIVComboExpandedestPlugin.Combos
                     return OriginalHook(RDM.Reprise);
 
                 if ((blackMagic && !IsEnabled(CustomComboPreset.RedMageVerprocComboVerfireOption)) || (actionID == RDM.Verstone && !IsEnabled(CustomComboPreset.RedMageVerprocComboVerstoneOption)))
-                    if (level >= RDM.Levels.Jolt3 && level < RDM.Levels.VerprocBuff)
-                        return OriginalHook(RDM.Jolt2);
+                {
+                    if (IsEnabled(CustomComboPreset.RedMageVerprocJolt3Option))
+                    {
+                        if (level >= RDM.Levels.Jolt3 && level < RDM.Levels.VerprocBuff)
+                            return OriginalHook(RDM.Jolt2);
+                    }
 
-                if (actionID == RDM.Verstone && HasEffect(RDM.Buffs.VerstoneReady))
-                    return RDM.Verstone;
+                    if (actionID == RDM.Verstone && HasEffect(RDM.Buffs.VerstoneReady))
+                    {
+                        if (IsEnabled(CustomComboPreset.RedMageVerprocComboVerstoneOption))
+                            return RDM.Verstone;
 
-                if (blackMagic && HasEffect(RDM.Buffs.VerfireReady))
-                    return RDM.Verfire;
+                        if (IsEnabled(CustomComboPreset.RedMageVerprocCancelPrevention))
+                        {
+                            var verstoneEffect = FindEffect(RDM.Buffs.VerstoneReady);
+                            if (verstoneEffect == null || verstoneEffect.RemainingTime < 0f || verstoneEffect.RemainingTime > Service.Configuration.VerprocCancelThreshold)
+                                return RDM.Verstone;
+                            if (!HasCondition(ConditionFlag.InCombat) && IsEnabled(CustomComboPreset.RedMageVerprocOpenerFeatureStone) && level >= RDM.Levels.Veraero)
+                                return OriginalHook(RDM.Veraero);
+                        }
+                        else
+                        {
+                            return RDM.Verstone;
+                        }
+                    }
+
+                    if (blackMagic && HasEffect(RDM.Buffs.VerfireReady))
+                    {
+                        if (IsEnabled(CustomComboPreset.RedMageVerprocComboVerfireOption))
+                            return RDM.Verfire;
+
+                        if (IsEnabled(CustomComboPreset.RedMageVerprocCancelPrevention))
+                        {
+                            var verfireEffect = FindEffect(RDM.Buffs.VerfireReady);
+                            if (verfireEffect == null || verfireEffect.RemainingTime < 0f || verfireEffect.RemainingTime > Service.Configuration.VerprocCancelThreshold)
+                                return RDM.Verfire;
+                            if (!HasCondition(ConditionFlag.InCombat) && IsEnabled(CustomComboPreset.RedMageVerprocOpenerFeatureFire) && level >= RDM.Levels.Verthunder)
+                                return OriginalHook(RDM.Verthunder);
+                        }
+                        else
+                        {
+                            return RDM.Verfire;
+                        }
+                    }
+                }
 
                 if ((blackMagic && !IsEnabled(CustomComboPreset.RedMageVerprocComboVerfireOption)) || (actionID == RDM.Verstone && !IsEnabled(CustomComboPreset.RedMageVerprocComboVerstoneOption)))
-                    return OriginalHook(RDM.Jolt2);
-            }
+                        return OriginalHook(RDM.Jolt2);
+                }
 
             return actionID;
         }

@@ -1217,6 +1217,16 @@ namespace XIVComboExpandedestPlugin
         RedMageVerprocComboVerthunderOption = 3526,
 
         [OrderedEnum]
+        [ParentCombo(RedMageVerprocCombo)]
+        [CustomComboInfo("Verproc to Jolt 3 Optimization", "Changes Verstone/Verfire to Jolt 3 when it is a DPS gain.", RDM.JobID, RDM.Verstone, RDM.Verfire)]
+        RedMageVerprocJolt3Option = 3527,
+
+        [OrderedEnum]
+        [ParentCombo(RedMageVerprocCombo)]
+        [CustomComboInfo("Verproc Cancel Prevention", "Changes Verstone/Verfire to Jolt when their buff has 2 seconds or less remaining to prevent canceling the cast.", RDM.JobID, RDM.Verstone, RDM.Verfire)]
+        RedMageVerprocCancelPrevention = 3528,
+
+        [OrderedEnum]
         [ParentCombo(RedMageVerprocComboPlus)]
         [CustomComboInfo("Verproc into Jolt Plus Option", "Verstone/Verfire never get replaced by their respective long cast (Veraero/Verthunder) if usable (unless both are usable).\nMildly incompatible with current RDM opener.", RDM.JobID, RDM.Verstone, RDM.Verfire)]
         RedMageVerprocComboPlusOption = 3523,
