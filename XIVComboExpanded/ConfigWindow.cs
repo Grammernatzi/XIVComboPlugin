@@ -248,6 +248,24 @@ namespace XIVComboExpandedestPlugin
                             ImGui.Spacing();
                         }
 
+                        if (preset == CustomComboPreset.RedMageVerprocCancelPrevention && enabled)
+                        {
+                            float cancelThreshold = Service.Configuration.VerprocCancelThreshold;
+
+                            ImGui.Indent();
+                            var inputChanged = false;
+                            inputChanged |= ImGui.SliderFloat("Proc Cancel Threshold (seconds)", ref cancelThreshold, 1.90f, 3.00f, "%.2f");
+                            ImGui.Unindent();
+
+                            if (inputChanged)
+                            {
+                                Service.Configuration.VerprocCancelThreshold = cancelThreshold;
+                                Service.Configuration.Save();
+                            }
+
+                            ImGui.Spacing();
+                        }
+
                         if (parent != null)
                             ImGui.Unindent();
 
